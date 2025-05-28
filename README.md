@@ -1,2 +1,2 @@
 # cub3d
-RayCaster game with miniLibX
+RayCaster game with miniLibX created as a project of 42Madrid.
