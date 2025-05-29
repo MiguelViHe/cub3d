@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 15:49:22 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/05/29 15:47:10 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/05/29 18:02:12 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,48 @@ t_game	init_game(char *argv[])
 	game.fov_degrees = atof(argv[4]);
 	game.fov_factor = calculate_fov_factor(game.fov_degrees);
 	game.plane = calculate_plane(game.player_dir, game.fov_factor);
-	game.cameraX = calculate_cameraX(atoi(argv[5]));
-	game.ray_dir = calculate_ray_dir(game.player_dir, game.plane, game.cameraX);
+	game.time.prev = 0;
+	game.time.current = 0;
 	return (game);
+}
+
+void	cast_all_rays(t_game *game)
+{
+	int		x;
+	t_ray	ray;
+
+	x = 0;
+	while (x < screenWidth)
+	{
+		ray.cameraX = calculate_cameraX(x);
+		ray.dir = calculate_ray_dir(game->player_dir, game->plane, ray.cameraX);
+		printf("cameraX = %.3f, Columna %d: rayDirX = %.3f, rayDirY = %.3f\n", ray.cameraX, x, ray.dir.x, ray.dir.y);
+		x++;
+		// Más adelante: DDA aquí.
+	}
 }
 
 int	main(int argc, char *argv[])
 {
 	t_game	game;
 
-	if (argc != 6 || !dir_ok(argv[3]))
+	if (argc != 5 || !dir_ok(argv[3]))
 	{
-		printf("Bad args. Try x_pos y_pos init_dir (N, S, E or W), fov (in degrees) and pixels_column\n");
+		printf("Bad args. Try x_pos y_pos init_dir (N, S, E or W), fov (in degrees)\n");
 		return (0);
 	}
 	game = init_game(argv);
-	print_game_info(game);
-	rotate_player(&game, 90);
-	printf("\nrotando 90 positivos....\n\n");
-	print_game_info(game);
-	rotate_player(&game, 90);
-	printf("\nrotando 90 positivos....\n\n");
-	print_game_info(game);
-	rotate_player(&game, 180);
-	printf("\nrotando 180 positivos....\n\n");
-	print_game_info(game);
+	print_game_info(&game);
+	printf("\nimprimiendo rayos:\n\n");
+	cast_all_rays(&game);
+	// rotate_player(&game, 90);
+	// printf("\nrotando 90 positivos....\n\n");
+	// print_game_info(game);
+	// rotate_player(&game, 90);
+	// printf("\nrotando 90 positivos....\n\n");
+	// print_game_info(game);
+	// rotate_player(&game, 180);
+	// printf("\nrotando 180 positivos....\n\n");
+	// print_game_info(game);
 	return (0);
 }

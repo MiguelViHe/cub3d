@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/05/29 14:54:12 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/05/29 17:52:31 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ double		deg_to_rad(double degrees);
 void		rotate_vector(t_vector *vect, double angle);
 
 //printer.h
-void		print_game_info(t_game game);
+void		print_game_info(t_game *game);
 
 //calculators.h
 double		calculate_fov_factor(double fov_degrees);

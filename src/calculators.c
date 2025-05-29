@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 10:07:01 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/05/29 13:59:15 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/05/29 18:28:13 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ t_vector	calculate_plane(t_vector dir, double fov_factor)
 {
 	t_vector	plane;
 
-	plane.x = dir.y * fov_factor;
-	plane.y = -dir.x * fov_factor;
+	plane.x = -dir.y * fov_factor;
+	plane.y = dir.x * fov_factor;
 	return (plane);
 }
 
