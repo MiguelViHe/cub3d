@@ -6,12 +6,12 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 09:01:04 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/05/29 09:02:03 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/05/29 12:40:21 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-float	deg_to_rad(float degrees) {
-	return degrees * (M_PI / 180.0f);
+double	deg_to_rad(double degrees) {
+	return degrees * (M_PI / 180);
 }

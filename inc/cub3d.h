@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/05/29 10:14:19 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/05/29 12:36:26 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@
 # include "structs.h"
 
 //transform.h
-float			deg_to_rad(float degrees);
+double			deg_to_rad(double degrees);
 
 //printer.h
 void			print_game_info(t_game game);
 
 //calculators.h
-float			calculate_fov_factor(float fov_degrees);
+double			calculate_fov_factor(double fov_degrees);
 t_player_dir	calculate_player_dir(char dir);
-t_plane			calculate_plane(t_player_dir dir, float fov_factor);
-float			calculate_cameraX(int x);
-t_ray_dir		calculate_ray_dir(t_player_dir dir, t_plane plane, float cameraX);
+t_plane			calculate_plane(t_player_dir dir, double fov_factor);
+double			calculate_cameraX(int x);
+t_ray_dir		calculate_ray_dir(t_player_dir dir, t_plane plane, double cameraX);
 
 //checkers.c
 int	dir_ok(char *dir);
