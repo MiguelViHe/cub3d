@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transform.c                                        :+:      :+:    :+:   */
+/*   rotate_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/29 09:01:04 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/05/29 15:40:58 by mvidal-h         ###   ########.fr       */
+/*   Created: 2025/05/29 13:33:46 by mvidal-h          #+#    #+#             */
+/*   Updated: 2025/05/29 15:30:12 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-double	deg_to_rad(double degrees)
+void	rotate_player(t_game *game, double angle)
 {
-    return (degrees * (M_PI / 180));
-}
-
-void	rotate_vector(t_vector *vect, double radians)
-{
-	double	old_vect_x;
-
-	old_vect_x = vect->x;
-	vect->x = vect->x * cos(radians) - vect->y * sin(radians);
-	vect->y = old_vect_x * sin(radians) + vect->y * cos(radians);
+	double  rad_angle;
+	
+	rad_angle = deg_to_rad(angle);
+	rotate_vector(&game->player_dir, rad_angle);
+	rotate_vector(&game->plane, rad_angle);
 }

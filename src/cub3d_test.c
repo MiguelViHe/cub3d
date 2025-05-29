@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 15:49:22 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/05/29 10:13:35 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:47:10 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ t_game	init_game(char *argv[])
 {
 	t_game	game;
 
-	game.player_pos.pos_x = atoi(argv[1]);
-	game.player_pos.pos_y = atoi(argv[2]);
+	game.player_pos.x = atoi(argv[1]);
+	game.player_pos.y = atoi(argv[2]);
 	game.player_dir = calculate_player_dir(argv[3][0]);
 	game.fov_degrees = atof(argv[4]);
 	game.fov_factor = calculate_fov_factor(game.fov_degrees);
@@ -37,6 +37,15 @@ int	main(int argc, char *argv[])
 		return (0);
 	}
 	game = init_game(argv);
+	print_game_info(game);
+	rotate_player(&game, 90);
+	printf("\nrotando 90 positivos....\n\n");
+	print_game_info(game);
+	rotate_player(&game, 90);
+	printf("\nrotando 90 positivos....\n\n");
+	print_game_info(game);
+	rotate_player(&game, 180);
+	printf("\nrotando 180 positivos....\n\n");
 	print_game_info(game);
 	return (0);
 }

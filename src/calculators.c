@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 10:07:01 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/05/29 12:38:22 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/05/29 13:59:15 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,31 +20,31 @@ double	calculate_fov_factor(double fov_degrees)
 	return (tanf(half_angle_rad));
 }
 
-t_player_dir	calculate_player_dir(char dir)
+t_vector	calculate_player_dir(char dir)
 {
-	t_player_dir	player_dir;
+	t_vector	player_dir;
 
 	if (dir == 'N' || dir == 'S')
-		player_dir.dir_x = 0;
+		player_dir.x = 0;
 	if (dir == 'N')
-		player_dir.dir_y = -1;
+		player_dir.y = -1;
 	if (dir == 'S')
-		player_dir.dir_y = 1;
+		player_dir.y = 1;
 	if (dir == 'E' || dir == 'W')
-		player_dir.dir_y = 0;
+		player_dir.y = 0;
 	if (dir == 'E')
-		player_dir.dir_x = 1;
+		player_dir.x = 1;
 	if (dir == 'W')
-		player_dir.dir_x = -1;
+		player_dir.x = -1;
 	return (player_dir);
 }
 
-t_plane	calculate_plane(t_player_dir dir, double fov_factor)
+t_vector	calculate_plane(t_vector dir, double fov_factor)
 {
-	t_plane	plane;
+	t_vector	plane;
 
-	plane.plane_x = dir.dir_y * fov_factor;
-	plane.plane_y = -dir.dir_x * fov_factor;
+	plane.x = dir.y * fov_factor;
+	plane.y = -dir.x * fov_factor;
 	return (plane);
 }
 
@@ -53,11 +53,11 @@ double	calculate_cameraX(int x)
 	return (2 * x / (double)screenWidth - 1);
 }
 
-t_ray_dir	calculate_ray_dir(t_player_dir dir, t_plane plane, double cameraX)
+t_vector	calculate_ray_dir(t_vector dir, t_vector plane, double cameraX)
 {
-	t_ray_dir	ray_dir;
+	t_vector	ray_dir;
 
-	ray_dir.ray_x = dir.dir_x + plane.plane_x * cameraX;
-	ray_dir.ray_y = dir.dir_y + plane.plane_y * cameraX;
+	ray_dir.x = dir.x + plane.x * cameraX;
+	ray_dir.y = dir.y + plane.y * cameraX;
 	return (ray_dir);
 }
