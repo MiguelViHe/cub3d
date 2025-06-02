@@ -6,7 +6,7 @@
 #    By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/14 10:02:29 by mvidal-h          #+#    #+#              #
-#    Updated: 2025/05/29 10:46:52 by mvidal-h         ###   ########.fr        #
+#    Updated: 2025/05/30 12:10:22 by mvidal-h         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,33 +42,33 @@ all: $(NAME)
 
 #compile the executable
 $(NAME): $(OBJ_FILES)
-	@echo "$(YELLOW)Compiling [$(NAME)]...$(RESET)"
+	@echo -e "$(YELLOW)Compiling [$(NAME)]...$(RESET)"
 	@$(CC) $(CFLAGS) $(IFLAGS) $(OBJ_FILES) $(LDFLAGS) -o $(NAME)
-	@echo "$(GREEN)Finished [$(NAME)]$(RESET)"
+	@echo -e "$(GREEN)Finished [$(NAME)]$(RESET)"
 
 #compile objects
 $(OBJ_DIR)%.o:$(SRC_DIR)%.c Makefile
 	@$(MKDIR) $(dir $@)
-	@echo "$(YELLOW)Compiling [$@]...$(RESET)"
+	@echo -e "$(YELLOW)Compiling [$@]...$(RESET)"
 	@$(CC) $(CFLAGS) $(IFLAGS) -MP -MMD -c $< -o $@
 	@printf "$(UP)$(CUT)"
-	@echo "$(GREEN)Finished [$@]$(RESET)"
+	@echo -e "$(GREEN)Finished [$@]$(RESET)"
 	@printf "$(UP)$(CUT)"
 
 #clean rule
 clean:
 	@if [ -d "$(OBJ_DIR)" ]; then \
 	rm -rf $(OBJ_DIR); \
-	echo "$(BLUE)Deleting all objects from /$(EXERCISE)...$(RESET)"; else \
-	echo "No objects to remove from /$(EXERCISE)."; \
+	echo -e "$(BLUE)Deleting all objects from /$(EXERCISE)...$(RESET)"; else \
+	echo -e "No objects to remove from /$(EXERCISE)."; \
 	fi;
 
 #fclean rule
 fclean: clean
 	@if [ -f "$(NAME)" ]; then \
 	rm -f $(NAME); \
-	echo "$(BLUE)Deleting $(NAME) from $(EXERCISE)...$(RESET)"; else \
-	echo "No Executable to remove from $(EXERCISE)."; \
+	echo -e "$(BLUE)Deleting $(NAME) from $(EXERCISE)...$(RESET)"; else \
+	echo -e "No Executable to remove from $(EXERCISE)."; \
 	fi;
 
 #re rule

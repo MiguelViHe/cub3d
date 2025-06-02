@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 15:49:22 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/05/29 18:02:12 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/02 11:17:15 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ t_game	init_game(char *argv[])
 	return (game);
 }
 
+void	setup_dda(t_ray *ray, t_game *game)
+{
+	
+}
+
 void	cast_all_rays(t_game *game)
 {
 	int		x;
@@ -35,9 +40,11 @@ void	cast_all_rays(t_game *game)
 	x = 0;
 	while (x < screenWidth)
 	{
+		setup_dda(&ray, game);
+		set_ray_pos(&ray, game);
 		ray.cameraX = calculate_cameraX(x);
 		ray.dir = calculate_ray_dir(game->player_dir, game->plane, ray.cameraX);
-		printf("cameraX = %.3f, Columna %d: rayDirX = %.3f, rayDirY = %.3f\n", ray.cameraX, x, ray.dir.x, ray.dir.y);
+		// printf("cameraX = %.3f, Columna %d: rayDirX = %.3f, rayDirY = %.3f\n", ray.cameraX, x, ray.dir.x, ray.dir.y);
 		x++;
 		// Más adelante: DDA aquí.
 	}

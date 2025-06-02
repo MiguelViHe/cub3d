@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calculators.c                                      :+:      :+:    :+:   */
+/*   calculate_player.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 10:07:01 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/05/29 18:28:13 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/05/30 16:55:11 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,4 @@ t_vector	calculate_plane(t_vector dir, double fov_factor)
 	plane.x = -dir.y * fov_factor;
 	plane.y = dir.x * fov_factor;
 	return (plane);
-}
-
-double	calculate_cameraX(int x)
-{
-	return (2 * x / (double)screenWidth - 1);
-}
-
-t_vector	calculate_ray_dir(t_vector dir, t_vector plane, double cameraX)
-{
-	t_vector	ray_dir;
-
-	ray_dir.x = dir.x + plane.x * cameraX;
-	ray_dir.y = dir.y + plane.y * cameraX;
-	return (ray_dir);
 }
