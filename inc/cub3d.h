@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/05/30 16:56:04 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:56:16 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 //transform.c
 double		deg_to_rad(double degrees);
 void		rotate_vector(t_vector *vect, double angle);
+t_vector	normalize(t_vector vect);
 
 //printer.c
 void		print_game_info(t_game *game);
@@ -41,6 +42,10 @@ t_vector	calculate_plane(t_vector dir, double fov_factor);
 //calculate_ray.c
 double		calculate_cameraX(int x);
 t_vector	calculate_ray_dir(t_vector dir, t_vector plane, double cameraX);
+void		set_ray_pos(t_ray *ray, t_game *game);
+void		calculate_delta_dist(t_ray *ray);
+void		calculate_step_dir(t_ray *ray);
+void		calculate_side_dist(t_ray *ray, t_vector *player_pos);
 
 //checkers.c
 int			dir_ok(char *dir);

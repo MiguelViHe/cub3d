@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 15:49:22 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/02 11:17:15 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/02 18:00:05 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ t_game	init_game(char *argv[])
 {
 	t_game	game;
 
-	game.player_pos.x = atoi(argv[1]);
-	game.player_pos.y = atoi(argv[2]);
+	game.player_pos.x = atof(argv[1]);
+	game.player_pos.y = atof(argv[2]);
 	game.player_dir = calculate_player_dir(argv[3][0]);
 	game.fov_degrees = atof(argv[4]);
 	game.fov_factor = calculate_fov_factor(game.fov_degrees);
@@ -29,7 +29,10 @@ t_game	init_game(char *argv[])
 
 void	setup_dda(t_ray *ray, t_game *game)
 {
-	
+	set_ray_pos(ray, game);
+	calculate_delta_dist(ray);
+	calculate_step_dir(ray);
+	calculate_side_dist(ray, &game->player_pos);
 }
 
 void	cast_all_rays(t_game *game)
@@ -40,11 +43,13 @@ void	cast_all_rays(t_game *game)
 	x = 0;
 	while (x < screenWidth)
 	{
-		setup_dda(&ray, game);
-		set_ray_pos(&ray, game);
 		ray.cameraX = calculate_cameraX(x);
 		ray.dir = calculate_ray_dir(game->player_dir, game->plane, ray.cameraX);
-		// printf("cameraX = %.3f, Columna %d: rayDirX = %.3f, rayDirY = %.3f\n", ray.cameraX, x, ray.dir.x, ray.dir.y);
+		setup_dda(&ray, game);
+		printf("cameraX = %.5f, Columna %d: rayDirX = %.5f, rayDirY = %.5f ", ray.cameraX, x, ray.dir.x, ray.dir.y);
+		printf("||||| deltaX = %.5f , deltaY = %.5f", ray.delta_dist.x, ray.delta_dist.y);
+		printf("||||| stepX = %d , stepY = %d", ray.step.x, ray.step.y);
+		printf("||||| sideX = %.5f , sideY = %.5f\n", ray.side_dist.x, ray.side_dist.y);
 		x++;
 		// Más adelante: DDA aquí.
 	}
