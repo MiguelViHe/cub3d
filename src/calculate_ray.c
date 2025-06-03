@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 16:54:21 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/02 16:52:37 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/03 17:03:33 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void	set_ray_pos(t_ray *ray, t_game *game)
 void	calculate_delta_dist(t_ray *ray)
 {
 	if (ray->dir.x == 0)
-		ray->delta_dist.x = 1e30;
+		ray->delta_dist.x = INFINITY;
 	else
 		ray->delta_dist.x = fabs(1 / ray->dir.x); //distancia real (hipotenusa) que recorre el rayo para pasar de una línea vertical a la siguiente (es decir, avanzar una unidad completa en X).
 	if (ray->dir.y == 0)
-		ray->delta_dist.y = 1e30;
+		ray->delta_dist.y = INFINITY;
 	else
 		ray->delta_dist.y = fabs(1 / ray->dir.y); //distancia real (hipotenusa) que recorre el rayo para pasar de una línea horizontal a la siguiente (es decir, avanzar una unidad completa en Y).
 }

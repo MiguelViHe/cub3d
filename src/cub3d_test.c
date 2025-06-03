@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 15:49:22 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/02 18:00:05 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/03 20:12:37 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,28 @@ void	setup_dda(t_ray *ray, t_game *game)
 	calculate_side_dist(ray, &game->player_pos);
 }
 
+void	raycast_dda(t_ray *ray, t_game *game)
+{
+	ray->hit = 0;
+	while (!ray->hit)
+	{
+		if (ray->side_dist.x < ray->side_dist.y)
+		{
+			ray->side_dist.x += ray->delta_dist.x;
+			ray->map.x += ray->step.x;
+			ray->side = 0;
+		}
+		else
+		{
+			ray->side_dist.y += + ray->delta_dist.y;
+			ray->map.y += ray->step.y;
+			ray->side = 1;
+		}
+		if (matrixWorld[ray->map.x][ray->map.y] > 0)
+			ray->hit = 1;
+	}
+}
+
 void	cast_all_rays(t_game *game)
 {
 	int		x;
@@ -47,11 +69,11 @@ void	cast_all_rays(t_game *game)
 		ray.dir = calculate_ray_dir(game->player_dir, game->plane, ray.cameraX);
 		setup_dda(&ray, game);
 		printf("cameraX = %.5f, Columna %d: rayDirX = %.5f, rayDirY = %.5f ", ray.cameraX, x, ray.dir.x, ray.dir.y);
-		printf("||||| deltaX = %.5f , deltaY = %.5f", ray.delta_dist.x, ray.delta_dist.y);
-		printf("||||| stepX = %d , stepY = %d", ray.step.x, ray.step.y);
+		printf("||||| deltaX = %.5f , deltaY = %.5f ", ray.delta_dist.x, ray.delta_dist.y);
+		printf("||||| stepX = %d , stepY = %d ", ray.step.x, ray.step.y);
 		printf("||||| sideX = %.5f , sideY = %.5f\n", ray.side_dist.x, ray.side_dist.y);
+		raycast_dda(&ray, game);
 		x++;
-		// Más adelante: DDA aquí.
 	}
 }
 

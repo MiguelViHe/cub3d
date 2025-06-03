@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:56:52 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/02 15:54:25 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/03 17:37:15 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ typedef struct	s_ray
 	t_vector	side_dist;		// distancia acumulada desde el origen del rayo a la próxima línea X o Y
 	t_coord		step;			// dirección de incremento en X e Y
 	int			side;			// 0 si el muro es vertical, 1 si horizontal
+	int			hit;			// 0 si aun no ha chocado con un muro, 1 si ha chocado.
 	double		perpWallDist;	// distancia corregida hasta la pared
 }				t_ray;
