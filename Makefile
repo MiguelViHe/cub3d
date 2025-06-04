@@ -6,7 +6,7 @@
 #    By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/14 10:02:29 by mvidal-h          #+#    #+#              #
-#    Updated: 2025/06/04 10:48:04 by mvidal-h         ###   ########.fr        #
+#    Updated: 2025/06/04 12:25:07 by mvidal-h         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ $(LIB):
 	@make -sC $(SUBMODULES)
 
 #compile the executable
-$(NAME): $(OBJ_FILES)
+$(NAME): $(LIB) $(OBJ_FILES)
 	@echo -e "$(YELLOW)Compiling [$(NAME)]...$(RESET)"
 	@$(CC) $(CFLAGS) $(IFLAGS) $(OBJ_FILES) $(LDFLAGS) -o $(NAME)
 	@echo -e "$(GREEN)Finished [$(NAME)]$(RESET)"
@@ -64,18 +64,18 @@ $(NAME): $(OBJ_FILES)
 #clean rule
 clean:
 	@if [ -d "$(OBJ_DIR)" ]; then \
-	$(RM) $(OBJ_DIR); \
-	echo -e "$(BLUE)Deleting all objects from /$(EXERCISE)...$(RESET)"; else \
-	echo -e "No objects to remove from /$(EXERCISE)."; \
+		$(RM) $(OBJ_DIR); \
+		echo -e "$(BLUE)Deleting all objects from $(NAME)...$(RESET)"; else \
+		echo -e "No objects to remove from $(NAME)."; \
 	fi;
 	@make fclean -sC $(SUBMODULES)
 
 #fclean rule
 fclean: clean
 	@if [ -f "$(NAME)" ]; then \
-	$(RM) $(NAME); \
-	echo -e "$(BLUE)Deleting $(NAME) from $(EXERCISE)...$(RESET)"; else \
-	echo -e "No Executable to remove from $(EXERCISE)."; \
+		$(RM) $(NAME); \
+		echo -e "$(BLUE)Deleting $(NAME)...$(RESET)"; else \
+		echo -e "No Executable to remove from $(NAME)."; \
 	fi;
 
 #re rule
