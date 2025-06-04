@@ -6,14 +6,17 @@
 #    By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/14 10:02:29 by mvidal-h          #+#    #+#              #
-#    Updated: 2025/05/30 12:10:22 by mvidal-h         ###   ########.fr        #
+#    Updated: 2025/06/04 10:48:04 by mvidal-h         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	cub3d
 
-CC			=	cc
+CC			= cc
 MKDIR		= mkdir -p
+RM			= rm -rf
+SUBMODULES	= submodules/
+LIB			= submodules/lib
 
 # directories
 SRC_DIR		=	src/
@@ -29,9 +32,9 @@ RED			=	\033[31m
 UP			=	\033[A
 CUT			=	\033[K
 
-CFLAGS		=	-Wall -Werror -Wextra
-IFLAGS		= -I$(INC_DIR)
-LDFLAGS 	=  -lm
+CFLAGS		=	-Wall -Werror -Wextra -g3 -fsanitize=address -O3
+IFLAGS		= -I$(INC_DIR) -I$(LIB)/$(INC_DIR)
+LDFLAGS 	=  -L$(LIB) -lft -ldl -lglfw -pthread -lm
 
 # Variables de fuentes y objetos
 SRC_FILES	:= $(shell find $(SRC_DIR) -type f -name "*.c")
@@ -39,12 +42,6 @@ OBJ_FILES	:= $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRC_FILES))
 
 #all rule
 all: $(NAME)
-
-#compile the executable
-$(NAME): $(OBJ_FILES)
-	@echo -e "$(YELLOW)Compiling [$(NAME)]...$(RESET)"
-	@$(CC) $(CFLAGS) $(IFLAGS) $(OBJ_FILES) $(LDFLAGS) -o $(NAME)
-	@echo -e "$(GREEN)Finished [$(NAME)]$(RESET)"
 
 #compile objects
 $(OBJ_DIR)%.o:$(SRC_DIR)%.c Makefile
@@ -55,18 +52,28 @@ $(OBJ_DIR)%.o:$(SRC_DIR)%.c Makefile
 	@echo -e "$(GREEN)Finished [$@]$(RESET)"
 	@printf "$(UP)$(CUT)"
 
+$(LIB):
+	@make -sC $(SUBMODULES)
+
+#compile the executable
+$(NAME): $(OBJ_FILES)
+	@echo -e "$(YELLOW)Compiling [$(NAME)]...$(RESET)"
+	@$(CC) $(CFLAGS) $(IFLAGS) $(OBJ_FILES) $(LDFLAGS) -o $(NAME)
+	@echo -e "$(GREEN)Finished [$(NAME)]$(RESET)"
+
 #clean rule
 clean:
 	@if [ -d "$(OBJ_DIR)" ]; then \
-	rm -rf $(OBJ_DIR); \
+	$(RM) $(OBJ_DIR); \
 	echo -e "$(BLUE)Deleting all objects from /$(EXERCISE)...$(RESET)"; else \
 	echo -e "No objects to remove from /$(EXERCISE)."; \
 	fi;
+	@make fclean -sC $(SUBMODULES)
 
 #fclean rule
 fclean: clean
 	@if [ -f "$(NAME)" ]; then \
-	rm -f $(NAME); \
+	$(RM) $(NAME); \
 	echo -e "$(BLUE)Deleting $(NAME) from $(EXERCISE)...$(RESET)"; else \
 	echo -e "No Executable to remove from $(EXERCISE)."; \
 	fi;
