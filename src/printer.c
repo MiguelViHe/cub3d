@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 10:00:24 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/05/29 17:55:07 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:32:42 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,29 @@
 
 void	print_game_info(t_game *game)
 {
-	printf("player pos = [%g, %g]\n", game->player_pos.x, game->player_pos.y);
-	printf("player dir = [%g, %g]\n", game->player_dir.x, game->player_dir.y);
+	printf("player pos = [%g, %g]\n", game->player.pos.x, game->player.pos.y);
+	printf("player dir = [%g, %g]\n", game->player.dir.x, game->player.dir.y);
 	printf("fov_degrees = %g\n", game->fov_degrees);
 	printf("fov_factor = %g\n", game->fov_factor);
-	printf("plane = [%g, %g]\n", game->plane.x, game->plane.y);
-	printf("times [prev, current] = [%g, %g]\n", game->time.prev, game->time.current);
+	printf("plane = [%g, %g]\n", game->player.plane.x, game->player.plane.y);
+	printf("time[prev, current] = [%g, %g]\n", game->time.prev, game->time.current);
+}
+
+void	print_game_map(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			ft_printf("%c", map[i][j]);
+			j++;
+		}
+		i++;
+	}
 }

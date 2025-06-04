@@ -6,7 +6,7 @@
 #    By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/14 10:02:29 by mvidal-h          #+#    #+#              #
-#    Updated: 2025/06/04 12:25:07 by mvidal-h         ###   ########.fr        #
+#    Updated: 2025/06/04 16:49:38 by mvidal-h         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ LDFLAGS 	=  -L$(LIB) -lft -ldl -lglfw -pthread -lm
 
 # Variables de fuentes y objetos
 SRC_FILES	:= $(shell find $(SRC_DIR) -type f -name "*.c")
-OBJ_FILES	:= $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRC_FILES))
+OBJ_FILES := $(subst $(SRC_DIR),$(OBJ_DIR),$(SRC_FILES:.c=.o))
+
 
 #all rule
 all: $(NAME)

@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/02 16:56:16 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:27:56 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <math.h>
 # include <string.h> //strlen
 # include "structs.h"
+# include "libft.h"
 
 //transform.c
 double		deg_to_rad(double degrees);
@@ -33,25 +34,44 @@ t_vector	normalize(t_vector vect);
 
 //printer.c
 void		print_game_info(t_game *game);
+void    	print_game_map(char **map);
 
 //calculate_player.c
-double		calculate_fov_factor(double fov_degrees);
-t_vector	calculate_player_dir(char dir);
-t_vector	calculate_plane(t_vector dir, double fov_factor);
+double		calc_fov_factor(double fov_degrees);
+t_vector	calc_player_dir(char dir);
+t_vector	calc_plane(t_vector dir, double fov_factor);
+void	    initialize_player(t_map *map, t_player *player);
 
 //calculate_ray.c
-double		calculate_cameraX(int x);
-t_vector	calculate_ray_dir(t_vector dir, t_vector plane, double cameraX);
+double		calc_cameraX(int x);
+t_vector	calc_ray_dir(t_vector dir, t_vector plane, double cameraX);
 void		set_ray_pos(t_ray *ray, t_game *game);
-void		calculate_delta_dist(t_ray *ray);
-void		calculate_step_dir(t_ray *ray);
-void		calculate_side_dist(t_ray *ray, t_vector *player_pos);
+void		calc_delta_dist(t_ray *ray);
+void		calc_step_dir(t_ray *ray);
+void		calc_side_dist(t_ray *ray, t_vector *player_pos);
 
 //checkers.c
 int			dir_ok(char *dir);
 
 //rotate_player.c
 void	rotate_player(t_game *game, double angle);
+
+//so_long/generate_map.c
+void	generate_map(char *map_name, t_map *map);
+
+//so_long/map_errors.c
+void	wrong_map_exit(char *buffer, char *message, int need_free);
+void	wrong_generate_map_exit(char *message, int fd);
+
+//so_long/freeing.c
+void	free_map_array(t_map *map);
+
+//so_long/files.c
+int	    secure_open(char *map_name);
+void	secure_close(int fd);
+
+//so_long/check_map.c
+int	    init_map_height(char *map_name);
 
 #endif
 

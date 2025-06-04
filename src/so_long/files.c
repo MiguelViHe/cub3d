@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate_player.c                                    :+:      :+:    :+:   */
+/*   files.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/29 13:33:46 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/04 15:33:19 by mvidal-h         ###   ########.fr       */
+/*   Created: 2024/07/09 10:53:15 by mvidal-h          #+#    #+#             */
+/*   Updated: 2025/06/04 14:36:35 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-void	rotate_player(t_game *game, double angle)
+int	secure_open(char *map_name)
 {
-	double  rad_angle;
-	
-	rad_angle = deg_to_rad(angle);
-	rotate_vector(&game->player.dir, rad_angle);
-	rotate_vector(&game->player.plane, rad_angle);
+	int	fd;
+
+	fd = open(map_name, O_RDONLY);
+	if (fd == -1)
+	{
+		ft_fdprintf(2, "Error opening file.\n");
+		exit(EXIT_FAILURE);
+	}
+	return (fd);
+}
+
+void	secure_close(int fd)
+{
+	if (close(fd) == -1)
+	{
+		ft_fdprintf(2, "Error closing file.\n");
+		exit(EXIT_FAILURE);
+	}
 }

@@ -6,13 +6,13 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 10:07:01 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/05/30 16:55:11 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:17:38 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-double	calculate_fov_factor(double fov_degrees)
+double	calc_fov_factor(double fov_degrees)
 {
 	double	half_angle_rad;
 
@@ -20,7 +20,7 @@ double	calculate_fov_factor(double fov_degrees)
 	return (tanf(half_angle_rad));
 }
 
-t_vector	calculate_player_dir(char dir)
+t_vector	calc_player_dir(char dir)
 {
 	t_vector	player_dir;
 
@@ -39,11 +39,38 @@ t_vector	calculate_player_dir(char dir)
 	return (player_dir);
 }
 
-t_vector	calculate_plane(t_vector dir, double fov_factor)
+t_vector	calc_plane(t_vector dir, double fov_factor)
 {
 	t_vector	plane;
 
 	plane.x = -dir.y * fov_factor;
 	plane.y = dir.x * fov_factor;
 	return (plane);
+}
+
+void	initialize_player(t_map *map, t_player *player)
+{
+	int		i;
+	int		j;
+	int		found;
+
+	i = 0;
+	found = 0;
+	while (!found && map->matrix[i])
+	{
+		j = 0;
+		while (!found && map->matrix[i][j] && map->matrix[i][j] != '\n')
+		{
+			if (map->matrix[i][j] == 'N' || map->matrix[i][j] == 'S' 
+				|| map->matrix[i][j] == 'E' || map->matrix[i][j] == 'W')
+			{
+				player->pos.x = j + 0.5;
+				player->pos.y = i + 0.5;
+				player->dir = calc_player_dir(map->matrix[i][j]);
+				found = 1;
+			}
+			j++;
+		}
+		i++;
+	}
 }

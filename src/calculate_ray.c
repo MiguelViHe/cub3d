@@ -6,18 +6,18 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 16:54:21 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/03 17:03:33 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:45:25 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-double	calculate_cameraX(int x)
+double	calc_cameraX(int x)
 {
 	return (2 * x / (double)screenWidth - 1);
 }
 
-t_vector	calculate_ray_dir(t_vector dir, t_vector plane, double cameraX)
+t_vector	calc_ray_dir(t_vector dir, t_vector plane, double cameraX)
 {
 	t_vector	ray_dir;
 
@@ -28,11 +28,11 @@ t_vector	calculate_ray_dir(t_vector dir, t_vector plane, double cameraX)
 
 void	set_ray_pos(t_ray *ray, t_game *game)
 {
-	ray->map.x = (int)game->player_pos.x;
-	ray->map.y = (int)game->player_pos.y;
+	ray->map.x = (int)game->player.pos.x;
+	ray->map.y = (int)game->player.pos.y;
 }
 
-void	calculate_delta_dist(t_ray *ray)
+void	calc_delta_dist(t_ray *ray)
 {
 	if (ray->dir.x == 0)
 		ray->delta_dist.x = INFINITY;
@@ -44,7 +44,7 @@ void	calculate_delta_dist(t_ray *ray)
 		ray->delta_dist.y = fabs(1 / ray->dir.y); //distancia real (hipotenusa) que recorre el rayo para pasar de una línea horizontal a la siguiente (es decir, avanzar una unidad completa en Y).
 }
 
-void	calculate_step_dir(t_ray *ray)
+void	calc_step_dir(t_ray *ray)
 {
 	ray->step.x = 0;
 	ray->step.y = 0;
@@ -58,7 +58,7 @@ void	calculate_step_dir(t_ray *ray)
 		ray->step.y = 1;
 }
 
-void	calculate_side_dist(t_ray *ray, t_vector *player_pos)
+void	calc_side_dist(t_ray *ray, t_vector *player_pos)
 {
 	if (ray->step.x < 0)
 		ray->side_dist.x = (player_pos->x - ray->map.x) * ray->delta_dist.x;

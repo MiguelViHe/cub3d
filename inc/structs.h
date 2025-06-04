@@ -6,60 +6,48 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:56:52 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/04 09:49:08 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/04 14:27:31 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 typedef struct	s_vector
 {
-	double	x;
-	double	y;
+	double		x;
+	double		y;
 }				t_vector;
 
 typedef struct	s_coord
 {
-	int	x;
-	int	y;
+	int			x;
+	int			y;
 }				t_coord;
 
 typedef struct	s_time
 {
-	double	prev;
-	double	current;
+	double		prev;
+	double		current;
 }				t_time;
 
-typedef struct s_map_elems
+typedef struct	s_player
 {
-	int	empty;
-	int	wall;
-	// int	collectible;
-	// int	exit;
-	int	player;
-}				t_map_elems;
+	t_vector	pos;
+	t_vector	dir;
+	t_vector	plane;
+}				t_player;
 
-typedef struct s_map
+typedef struct	s_map
 {
-	int				width;
-	int				height;
-	int				start_r;
-	int				start_c;
-	int				exit_r;
-	int				exit_c;
-	int				is_win;
-	unsigned int	moves;
-	char			**map;
-	t_map_elems		elems;
+	int			height;
+	char		**matrix;
 }				t_map;
 
 typedef struct	s_game
 {
-	t_vector	player_pos;
-	t_vector	player_dir;
+	t_player	player;
 	double		fov_degrees;
 	double		fov_factor;
-	t_vector	plane;
 	t_time		time;
-	t_map		*map;
+	t_map		map;
 }				t_game;
 
 typedef struct	s_ray
