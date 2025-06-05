@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 16:54:21 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/04 15:45:25 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:43:35 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,12 @@ void	calc_side_dist(t_ray *ray, t_vector *player_pos)
 		ray->side_dist.x = (player_pos->x - ray->map.x) * ray->delta_dist.x;
 	else if (ray->step.x > 0)
 		ray->side_dist.x = (ray->map.x + 1.0 - player_pos->x) * ray->delta_dist.x;
-	else ray->side_dist.x = INFINITY;
+	else
+		ray->side_dist.x = INFINITY;
 	if (ray->step.y < 0)
 		ray->side_dist.y = (player_pos->y - ray->map.y) * ray->delta_dist.y;
 	else if (ray->step.y > 0)
 		ray->side_dist.y = (ray->map.y + 1.0 - player_pos->y) * ray->delta_dist.y;
-	else ray->side_dist.y = INFINITY;
+	else
+		ray->side_dist.y = INFINITY;
 }

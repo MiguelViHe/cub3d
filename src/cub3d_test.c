@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 15:49:22 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/04 17:19:56 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/05 18:54:20 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ void	raycast_dda(t_ray *ray, t_game *g)
 		if (g->map.matrix[ray->map.y][ray->map.x] == '1')
 			ray->hit = 1;
 	}
+	if (ray->side == 0)
+		ray->perpWallDist = ray->side_dist.x - ray->delta_dist.x;
+	else
+		ray->perpWallDist = ray->side_dist.y - ray->delta_dist.y;
 }
 
 void	cast_all_rays(t_game *g)
@@ -69,6 +73,7 @@ void	cast_all_rays(t_game *g)
 		ray.dir = calc_ray_dir(g->player.dir, g->player.plane, ray.cameraX);
 		setup_dda(&ray, g);
 		raycast_dda(&ray, g);
+		//pintarlo aqui? o en raycast_dda?
 		printf("cameraX = %.5f, Columna %d: rayDirX = %.5f, rayDirY = %.5f ", ray.cameraX, x, ray.dir.x, ray.dir.y);
 		printf("||||| deltaX = %.5f , deltaY = %.5f ", ray.delta_dist.x, ray.delta_dist.y);
 		printf("||||| stepX = %d , stepY = %d ", ray.step.x, ray.step.y);

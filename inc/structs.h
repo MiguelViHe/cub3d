@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:56:52 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/04 14:27:31 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/05 18:52:05 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,22 @@ typedef struct	s_game
 	t_map		map;
 }				t_game;
 
+typedef struct	s_screenline
+{
+	int			start;
+	int			end;
+}				t_screenline;
+
 typedef struct	s_ray
 {
-	double		cameraX;
-	t_vector	dir;
-	t_coord		map;			// posición actual en la grid/mapa
-	t_vector	delta_dist;		// distancia a recorrer para pasar a la siguiente línea X o Y
-	t_vector	side_dist;		// distancia acumulada desde el origen del rayo a la próxima línea X o Y
-	t_coord		step;			// dirección de incremento en X e Y
-	int			side;			// 0 si el muro es vertical, 1 si horizontal
-	int			hit;			// 0 si aun no ha chocado con un muro, 1 si ha chocado.
-	double		perpWallDist;	// distancia corregida hasta la pared
+	double			cameraX;		//Normalizacion de las columnas de pixels de la pantalla (-1 .. 0 .. 1)
+	t_vector		dir;			//vector que indica la direccion a donde va el rayo.
+	t_coord			map;			// posición actual en la grid/mapa
+	t_vector		delta_dist;		// distancia a recorrer para pasar a la siguiente línea X o Y
+	t_vector		side_dist;		// distancia acumulada desde el origen del rayo a la próxima línea X o Y
+	t_coord			step;			// dirección de incremento en X e Y
+	int				side;			// 0 si el muro es vertical, 1 si horizontal
+	int				hit;			// 0 si aun no ha chocado con un muro, 1 si ha chocado.
+	double			perpWallDist;	// distancia corregida hasta la pared
+	t_screenline	draw;			// inicio y final de pintado de una linea de pantalla respecto a la distancia del muro.
 }				t_ray;
