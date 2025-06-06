@@ -6,9 +6,11 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:56:52 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/05 18:52:05 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/06 16:01:13 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "MLX42.h"
 
 typedef struct	s_vector
 {
@@ -41,6 +43,14 @@ typedef struct	s_map
 	char		**matrix;
 }				t_map;
 
+typedef struct	s_data
+{
+	mlx_t			*mlx;
+	mlx_image_t*	img;
+	int32_t			screen_width;
+	int32_t			screen_height;
+}				t_data;
+
 typedef struct	s_game
 {
 	t_player	player;
@@ -48,12 +58,14 @@ typedef struct	s_game
 	double		fov_factor;
 	t_time		time;
 	t_map		map;
+	t_data		data;
 }				t_game;
 
 typedef struct	s_screenline
 {
 	int			start;
 	int			end;
+	uint32_t	color;
 }				t_screenline;
 
 typedef struct	s_ray
@@ -66,6 +78,6 @@ typedef struct	s_ray
 	t_coord			step;			// dirección de incremento en X e Y
 	int				side;			// 0 si el muro es vertical, 1 si horizontal
 	int				hit;			// 0 si aun no ha chocado con un muro, 1 si ha chocado.
-	double			perpWallDist;	// distancia corregida hasta la pared
+	double			perpWallDist;	// distancia corregida hasta la pared perpendicular a plane.
 	t_screenline	draw;			// inicio y final de pintado de una linea de pantalla respecto a la distancia del muro.
 }				t_ray;

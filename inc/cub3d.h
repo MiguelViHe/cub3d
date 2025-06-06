@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/04 16:27:56 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/06 17:25:18 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,36 @@ void		calc_side_dist(t_ray *ray, t_vector *player_pos);
 int			dir_ok(char *dir);
 
 //rotate_player.c
-void	rotate_player(t_game *game, double angle);
+void		rotate_player(t_game *game, double angle);
+
+//color.c
+uint32_t	set_color_line(t_game *g, t_coord map, int wall_side);
+
+//draw.c
+void	draw_vertical_line(mlx_image_t*	img, int x, t_screenline draw);
+
+//cub3d_test.c
+void		cast_all_rays(t_game *g);
 
 //so_long/generate_map.c
-void	generate_map(char *map_name, t_map *map);
+void		generate_map(char *map_name, t_map *map);
 
 //so_long/map_errors.c
-void	wrong_map_exit(char *buffer, char *message, int need_free);
-void	wrong_generate_map_exit(char *message, int fd);
+void		wrong_map_exit(char *buffer, char *message, int need_free);
+void		wrong_generate_map_exit(char *message, int fd);
 
 //so_long/freeing.c
-void	free_map_array(t_map *map);
+void		free_map_array(t_map *map);
 
 //so_long/files.c
-int	    secure_open(char *map_name);
-void	secure_close(int fd);
+int			secure_open(char *map_name);
+void		secure_close(int fd);
 
 //so_long/check_map.c
-int	    init_map_height(char *map_name);
+int			init_map_height(char *map_name);
+
+//game/game.c
+int			initialize_game(t_game *game);
 
 #endif
 

@@ -6,7 +6,7 @@
 #    By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/14 10:02:29 by mvidal-h          #+#    #+#              #
-#    Updated: 2025/06/04 16:49:38 by mvidal-h         ###   ########.fr        #
+#    Updated: 2025/06/06 14:25:59 by mvidal-h         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ CUT			=	\033[K
 
 CFLAGS		=	-Wall -Werror -Wextra -g3 -fsanitize=address -O3
 IFLAGS		= -I$(INC_DIR) -I$(LIB)/$(INC_DIR)
-LDFLAGS 	=  -L$(LIB) -lft -ldl -lglfw -pthread -lm
+LDFLAGS 	=  -L$(LIB) -lft -lmlx42 -lX11 -lXext -ldl -lglfw -pthread -lm
 
 # Variables de fuentes y objetos
 SRC_FILES	:= $(shell find $(SRC_DIR) -type f -name "*.c")
