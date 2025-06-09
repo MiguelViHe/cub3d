@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/06 17:25:18 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/09 17:20:56 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ t_vector	normalize(t_vector vect);
 
 //printer.c
 void		print_game_info(t_game *game);
-void    	print_game_map(char **map);
+void		print_game_map(char **map);
 
 //calculate_player.c
 double		calc_fov_factor(double fov_degrees);
 t_vector	calc_player_dir(char dir);
 t_vector	calc_plane(t_vector dir, double fov_factor);
-void	    initialize_player(t_map *map, t_player *player);
+void		initialize_player(t_map *map, t_player *player);
 
 //calculate_ray.c
 double		calc_cameraX(int x);
@@ -53,14 +53,19 @@ void		calc_side_dist(t_ray *ray, t_vector *player_pos);
 //checkers.c
 int			dir_ok(char *dir);
 
-//rotate_player.c
+//player_movements.c
 void		rotate_player(t_game *game, double angle);
+void		move_player_forward(t_game *game, double moveSpeed);
+void		move_player_backward(t_game *game, double moveSpeed);
+void		strafe_player_left(t_game *game, double moveSpeed);
+void		strafe_player_right(t_game *game, double moveSpeed);
 
 //color.c
 uint32_t	set_color_line(t_game *g, t_coord map, int wall_side);
+uint32_t	darken_color(uint32_t color);
 
 //draw.c
-void	draw_vertical_line(mlx_image_t*	img, int x, t_screenline draw);
+void		draw_vertical_line(mlx_image_t*	img, int x, t_screenline draw);
 
 //cub3d_test.c
 void		cast_all_rays(t_game *g);
@@ -74,6 +79,7 @@ void		wrong_generate_map_exit(char *message, int fd);
 
 //so_long/freeing.c
 void		free_map_array(t_map *map);
+void		free_game(t_game *game);
 
 //so_long/files.c
 int			secure_open(char *map_name);
@@ -84,6 +90,11 @@ int			init_map_height(char *map_name);
 
 //game/game.c
 int			initialize_game(t_game *game);
+
+//hooks/hooks.c
+void	on_destroy(void *param);
+void	on_keypress(mlx_key_data_t keydata, void *param);
+void	on_game_loop(void *param);
 
 #endif
 

@@ -6,16 +6,21 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 12:43:48 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/06 15:33:12 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/09 16:46:20 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	init_time(t_time *time)
+{
+	time->current = mlx_get_time();
+	time->prev = time->current;
+}
+
 int	initialize_game(t_game *g)
 {
 	ft_memset(&g->data, 0, sizeof(t_data));
-
 	g->data.mlx = mlx_init(screenWidth, screenHeight, "mvidal-h", false);
 	if (!g->data.mlx)
 	{
@@ -30,8 +35,10 @@ int	initialize_game(t_game *g)
 	// verify_map_size(&data);
 	// load_images(&data);
 	// images_to_map(&data);
-	// mlx_key_hook(data.mlx, on_keypress, &data);
-	// mlx_close_hook(data.mlx, on_destroy, &data);
+	mlx_key_hook(g->data.mlx, on_keypress, g);
+	mlx_close_hook(g->data.mlx, on_destroy, g);
+	mlx_loop_hook(g->data.mlx, on_game_loop, g);
+	init_time(&g->time);
 	mlx_loop(g->data.mlx);
 	return (EXIT_SUCCESS);
 }

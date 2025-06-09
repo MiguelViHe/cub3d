@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 15:49:22 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/06 17:18:31 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/09 16:55:19 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,13 @@ t_game	init_game(char *map_name)
 {
 	t_game	game;
 
+	ft_memset(&game, 0, sizeof(t_game));
 	game.map.height = init_map_height(map_name);
 	generate_map(map_name, &game.map);
 	initialize_player(&game.map, &game.player);
 	game.fov_degrees = 66;
 	game.fov_factor = calc_fov_factor(game.fov_degrees);
 	game.player.plane = calc_plane(game.player.dir, game.fov_factor);
-	game.time.prev = 0;
-	game.time.current = 0;
 	return (game);
 }
 
@@ -72,7 +71,9 @@ void	calc_draw_line(t_game *g, t_ray *ray)
 	ray->draw.end = screenHeight / 2 + lineheight / 2;
 	if (ray->draw.end >= screenHeight)
 		ray->draw.end = screenHeight - 1;
-	ray->draw.color = set_color_line(g, ray->map, ray->side);
+	ray->draw.color_wall = set_color_line(g, ray->map, ray->side);
+	ray->draw.color_floor = darken_color(0xFFFFFFFF);
+	ray->draw.color_ceiling = 0x00000000;
 }
 
 void	cast_all_rays(t_game *g)
@@ -80,6 +81,7 @@ void	cast_all_rays(t_game *g)
 	int		x;
 	t_ray	ray;
 
+	ft_memset(&ray, 0, sizeof(t_ray));
 	x = 0;
 	while (x < screenWidth)
 	{
@@ -112,16 +114,5 @@ int	main(int argc, char *argv[])
 	print_game_info(&game);
 	print_game_map(game.map.matrix);
 	initialize_game(&game);
-	// cast_all_rays(&game);
-	// rotate_player(&game, 90);
-	// printf("\nrotando 90 positivos....\n\n");
-	// print_game_info(game);
-	// rotate_player(&game, 90);
-	// printf("\nrotando 90 positivos....\n\n");
-	// print_game_info(game);
-	// rotate_player(&game, 180);
-	// printf("\nrotando 180 positivos....\n\n");
-	// print_game_info(game);
-	free_map_array(&game.map);
 	return (0);
 }

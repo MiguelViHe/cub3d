@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:50:11 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/06 17:22:06 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/09 16:10:19 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ uint32_t	get_wall_color(t_game *g, t_coord map)
 	if (pos == '3')
 		return 0x0000FFFF; // azul
 	if (pos == '4')
-		return 0xFFFFFFFF; // blanco
-	return 0xFFFF00FF; // amarillo por defecto
+		return 0xFFFF00FF; // amarillo
+	return 0xFFA500FF; // naranja por defecto
 }
 
 uint32_t darken_color(uint32_t color)
