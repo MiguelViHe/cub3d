@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/10 15:08:40 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:31:46 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include "libft.h"
 
 //game/game.c
-int			initialize_game(t_game *game);
+int		launch_game(t_game *game);
 
 //hooks/hooks.c
 void	on_destroy(void *param);
@@ -97,8 +97,8 @@ void		print_game_info(t_game *game);
 void		print_game_map(char **map);
 
 //time.c
-void		init_time(t_time *time);
-void		upgrade_frameTime(t_time *time);
+// void		init_time(t_time *time);
+// void		upgrade_frameTime(t_time *time);
 
 //transform.c
 double		deg_to_rad(double degrees);

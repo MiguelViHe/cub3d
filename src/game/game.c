@@ -6,13 +6,13 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 12:43:48 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/10 12:12:24 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:32:19 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	initialize_game(t_game *g)
+int	launch_game(t_game *g)
 {
 	ft_memset(&g->data, 0, sizeof(t_data));
 	g->data.mlx = mlx_init(screenWidth, screenHeight, "mvidal-h", false);
@@ -32,7 +32,7 @@ int	initialize_game(t_game *g)
 	mlx_key_hook(g->data.mlx, on_keypress, g);
 	mlx_close_hook(g->data.mlx, on_destroy, g);
 	mlx_loop_hook(g->data.mlx, on_game_loop, g);
-	init_time(&g->time);
+	// init_time(&g->time);
 	mlx_loop(g->data.mlx);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:56:52 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/09 16:12:50 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:29:40 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ typedef struct	s_coord
 	int			y;
 }				t_coord;
 
-typedef struct	s_time
-{
-	double		prev;
-	double		current;
-	double		frameTime;
-}				t_time;
+// typedef struct	s_time
+// {
+// 	double		prev;
+// 	double		current;
+// 	double		frameTime;
+// }				t_time;
 
 typedef struct	s_player
 {
@@ -67,7 +67,7 @@ typedef struct	s_game
 	t_player	player;
 	double		fov_degrees;
 	double		fov_factor;
-	t_time		time;
+	// t_time		time;
 	t_map		map;
 	t_data		data;
 	t_input		input;

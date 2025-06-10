@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 10:00:24 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/06 16:55:13 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:33:41 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	print_game_info(t_game *game)
 	printf("fov_degrees = %g\n", game->fov_degrees);
 	printf("fov_factor = %g\n", game->fov_factor);
 	printf("plane = [%g, %g]\n", game->player.plane.x, game->player.plane.y);
-	printf("time[prev, current] = [%g, %g]\n", game->time.prev, game->time.current);
 }
 
 void	print_game_map(char **map)

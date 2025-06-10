@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 15:49:22 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/10 15:07:25 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:30:57 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ int	main(int argc, char *argv[])
 	game = init_game(argv[1]);
 	print_game_info(&game);
 	print_game_map(game.map.matrix);
-	initialize_game(&game);
+	launch_game(&game);
 	return (0);
 }
