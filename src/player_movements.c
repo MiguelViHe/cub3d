@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 13:33:46 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/09 17:44:26 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/10 10:27:46 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	move_player_forward(t_game *game, double moveSpeed)
 	new_x = game->player.pos.x + game->player.dir.x * moveSpeed;
 	new_y = game->player.pos.y + game->player.dir.y * moveSpeed;
 	// Mover en X si no hay pared en la posición nueva en X pero misma Y
-	if (game->map.matrix[(int)game->player.pos.y][(int)new_x] != '1')
+	if (game->map.matrix[(int)game->player.pos.y][(int)new_x] == '0')
 		game->player.pos.x = new_x;
 
 	// Mover en Y si no hay pared en la posición nueva en Y pero misma X
-	if (game->map.matrix[(int)new_y][(int)game->player.pos.x] != '1')
+	if (game->map.matrix[(int)new_y][(int)game->player.pos.x] == '0')
 		game->player.pos.y = new_y;
 }
 void	move_player_backward(t_game *game, double moveSpeed)
@@ -41,11 +41,11 @@ void	move_player_backward(t_game *game, double moveSpeed)
 	new_x = game->player.pos.x - game->player.dir.x * moveSpeed;
 	new_y = game->player.pos.y - game->player.dir.y * moveSpeed;
 	// Mover en X si no hay pared en la posición nueva en X pero misma Y
-	if (game->map.matrix[(int)game->player.pos.y][(int)new_x] != '1')
+	if (game->map.matrix[(int)game->player.pos.y][(int)new_x] == '0')
 		game->player.pos.x = new_x;
 
 	// Mover en Y si no hay pared en la posición nueva en Y pero misma X
-	if (game->map.matrix[(int)new_y][(int)game->player.pos.x] != '1')
+	if (game->map.matrix[(int)new_y][(int)game->player.pos.x] == '0')
 		game->player.pos.y = new_y;
 }
 void	strafe_player_left(t_game *game, double moveSpeed)
@@ -56,11 +56,11 @@ void	strafe_player_left(t_game *game, double moveSpeed)
 	new_x = game->player.pos.x - game->player.plane.x * moveSpeed;
 	new_y = game->player.pos.y - game->player.plane.y * moveSpeed;
 	// Mover en X si no hay pared en la posición nueva en X pero misma Y
-	if (game->map.matrix[(int)game->player.pos.y][(int)new_x] != '1')
+	if (game->map.matrix[(int)game->player.pos.y][(int)new_x] == '0')
 		game->player.pos.x = new_x;
 
 	// Mover en Y si no hay pared en la posición nueva en Y pero misma X
-	if (game->map.matrix[(int)new_y][(int)game->player.pos.x] != '1')
+	if (game->map.matrix[(int)new_y][(int)game->player.pos.x] == '0')
 		game->player.pos.y = new_y;
 }
 void	strafe_player_right(t_game *game, double moveSpeed)
@@ -71,10 +71,10 @@ void	strafe_player_right(t_game *game, double moveSpeed)
 	new_x = game->player.pos.x + game->player.plane.x * moveSpeed;
 	new_y = game->player.pos.y + game->player.plane.y * moveSpeed;
 	// Mover en X si no hay pared en la posición nueva en X pero misma Y
-	if (game->map.matrix[(int)game->player.pos.y][(int)new_x] != '1')
+	if (game->map.matrix[(int)game->player.pos.y][(int)new_x] == '0')
 		game->player.pos.x = new_x;
 
 	// Mover en Y si no hay pared en la posición nueva en Y pero misma X
-	if (game->map.matrix[(int)new_y][(int)game->player.pos.x] != '1')
+	if (game->map.matrix[(int)new_y][(int)game->player.pos.x] == '0')
 		game->player.pos.y = new_y;
 }

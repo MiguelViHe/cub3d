@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 10:07:01 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/04 16:17:38 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/10 10:36:05 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	initialize_player(t_map *map, t_player *player)
 				player->pos.x = j + 0.5;
 				player->pos.y = i + 0.5;
 				player->dir = calc_player_dir(map->matrix[i][j]);
+				map->matrix[i][j] = '0'; // quitar el simbolo de inicio del jugador del mapa.
 				found = 1;
 			}
 			j++;
