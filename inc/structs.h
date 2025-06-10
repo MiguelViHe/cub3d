@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:56:52 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/10 15:29:40 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/10 17:25:56 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,16 @@ typedef struct	s_data
 }				t_data;
 
 typedef struct s_input
+{
+	bool	move_forward;
+	bool	move_backward;
+	bool	move_left;
+	bool	move_right;
+	bool	rotate_left;
+	bool	rotate_right;
+}	t_input;
+
+typedef struct 
 {
 	bool	move_forward;
 	bool	move_backward;
