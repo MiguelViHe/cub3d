@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 13:33:46 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/10 10:27:46 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/10 12:49:24 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	move_player_forward(t_game *game, double moveSpeed)
 	if (game->map.matrix[(int)new_y][(int)game->player.pos.x] == '0')
 		game->player.pos.y = new_y;
 }
+
 void	move_player_backward(t_game *game, double moveSpeed)
 {
 	double	new_x;
@@ -48,6 +49,7 @@ void	move_player_backward(t_game *game, double moveSpeed)
 	if (game->map.matrix[(int)new_y][(int)game->player.pos.x] == '0')
 		game->player.pos.y = new_y;
 }
+
 void	strafe_player_left(t_game *game, double moveSpeed)
 {
 	double	new_x;
@@ -63,6 +65,7 @@ void	strafe_player_left(t_game *game, double moveSpeed)
 	if (game->map.matrix[(int)new_y][(int)game->player.pos.x] == '0')
 		game->player.pos.y = new_y;
 }
+
 void	strafe_player_right(t_game *game, double moveSpeed)
 {
 	double	new_x;

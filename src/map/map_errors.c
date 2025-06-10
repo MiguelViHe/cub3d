@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:51:23 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/04 14:30:12 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/10 12:42:07 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ void	wrong_map_exit(char *buffer, char *message, int need_free)
 	exit(EXIT_FAILURE);
 }
 
-/*Check if the map file extension is ".ber". Error and exit if not*/
-void	check_arg_ber(char *name)
+/*Check if the map file extension is ".cub". Error and exit if not*/
+void	check_arg_cub(char *name)
 {
 	int	len_total;
 	int	len_name;
 
 	len_total = ft_strlen(name);
 	len_name = len_total - 4;
-	if (!(len_total > 4 && ft_strncmp(name + len_name, ".ber", 4) == 0
+	if (!(len_total > 4 && ft_strncmp(name + len_name, ".cub", 4) == 0
 			&& name[len_total - 5] != '/'))
 	{
 		ft_fdprintf(2, "Error\nWrong map extension.\n");

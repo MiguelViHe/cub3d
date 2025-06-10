@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:04:11 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/09 17:47:57 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/10 12:20:13 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	on_keypress(mlx_key_data_t keydata, void *param)
 	}
 }
 
-void handle_input(t_game *g, double moveSpeed, double rotSpeed) //MOVER DE AQUI
+void handle_input(t_game *g, double moveSpeed, double rotSpeed)
 {
 	if (g->input.move_forward)
 		move_player_forward(g, moveSpeed);
@@ -62,13 +62,6 @@ void handle_input(t_game *g, double moveSpeed, double rotSpeed) //MOVER DE AQUI
 		rotate_player(g, rotSpeed);
 }
 
-void	upload_frameTime(t_time *time) //MOVER DE AQUI
-{
-	time->prev = time->current;
-	time->current = mlx_get_time();
-	time->frameTime = time->current - time->prev;
-}
-
 void on_game_loop(void *param)
 {
 	t_game	*g;
@@ -76,11 +69,12 @@ void on_game_loop(void *param)
 	double	rotSpeed;
 
 	g = (t_game *)param;
-	upload_frameTime(&g->time);
+	upgrade_frameTime(&g->time);
+	printf("Frame_time: %.3f - delta_time: %.3f\n", g->time.frameTime, g->data.mlx->delta_time);
 	moveSpeed = g->time.frameTime * 3.0;
 	rotSpeed = g->time.frameTime * 1.5;
 	handle_input(g, moveSpeed, rotSpeed);
 	cast_all_rays(g);
 	// Mostrar FPS (opcional)
-	printf("FPS: %.1f\n", 1.0 / g->time.frameTime);
+	//printf("FPS: %.1f\n", 1.0 / g->time.frameTime);
 }

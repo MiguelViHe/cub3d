@@ -6,17 +6,11 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 12:43:48 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/09 16:46:20 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/10 12:12:24 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	init_time(t_time *time)
-{
-	time->current = mlx_get_time();
-	time->prev = time->current;
-}
 
 int	initialize_game(t_game *g)
 {
