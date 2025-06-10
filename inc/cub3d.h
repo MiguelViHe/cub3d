@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/10 12:53:35 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:08:40 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,20 @@ void		move_player_backward(t_game *game, double moveSpeed);
 void		strafe_player_left(t_game *game, double moveSpeed);
 void		strafe_player_right(t_game *game, double moveSpeed);
 
-//calculate_ray.c
+//ray/calculate_ray.c
 double		calc_cameraX(int x);
 t_vector	calc_ray_dir(t_vector dir, t_vector plane, double cameraX);
 void		set_ray_pos(t_ray *ray, t_game *game);
 void		calc_delta_dist(t_ray *ray);
 void		calc_step_dir(t_ray *ray);
 void		calc_side_dist(t_ray *ray, t_vector *player_pos);
+
+//ray/dda.c
+void		setup_dda(t_ray *ray, t_game *game);
+void		raycast_dda(t_ray *ray, t_game *g);
+
+//ray/raycast.c
+void		cast_all_rays(t_game *g);
 
 //checkers.c
 int			dir_ok(char *dir);
@@ -75,6 +82,7 @@ uint32_t	darken_color(uint32_t color);
 
 //draw.c
 void		draw_vertical_line(mlx_image_t*	img, int x, t_screenline draw);
+void		calc_draw_line(t_game *g, t_ray *ray);
 
 //files.c
 int			secure_open(char *map_name);
