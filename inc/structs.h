@@ -6,12 +6,15 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:56:52 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/10 17:25:56 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:25:06 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42.h"
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
+# include "MLX42.h"
+# include "libft.h"
 typedef struct	s_vector
 {
 	double		x;
@@ -40,19 +43,33 @@ typedef struct	s_player
 
 typedef struct	s_map
 {
-	int			height;
+	size_t			height;
+	size_t			width;
+	int			player_count;
+	t_list		*map_list;
 	char		**matrix;
+
 }				t_map;
 
+typedef struct	s_textures
+{
+	char	*NO;
+	char	*SE;
+	char	*WE;
+	char	*EA;
+	char	*F;
+	char	*C;
+}				t_textures;
 typedef struct	s_data
 {
 	mlx_t			*mlx;
 	mlx_image_t		*img;
-	int32_t			screen_width;
-	int32_t			screen_height;
+	int32_t			screen_width; //No se si es necesario, pero lo dejo por si acaso
+	int32_t			screen_height; // No se si es necesario, pero lo dejo por si acasou
+	t_textures		textures; //quizas añadir la textura en archivo posteriormente.
 }				t_data;
 
-typedef struct s_input
+typedef struct	s_input
 {
 	bool	move_forward;
 	bool	move_backward;
@@ -60,17 +77,7 @@ typedef struct s_input
 	bool	move_right;
 	bool	rotate_left;
 	bool	rotate_right;
-}	t_input;
-
-typedef struct 
-{
-	bool	move_forward;
-	bool	move_backward;
-	bool	move_left;
-	bool	move_right;
-	bool	rotate_left;
-	bool	rotate_right;
-}	t_input;
+}				t_input;
 
 typedef struct	s_game
 {
@@ -105,3 +112,5 @@ typedef struct	s_ray
 	double			perpWallDist;	// distancia corregida hasta la pared perpendicular a plane.
 	t_screenline	draw;			// inicio y final de pintado de una linea de pantalla respecto a la distancia del muro.
 }				t_ray;
+
+#endif // STRUCTS_H

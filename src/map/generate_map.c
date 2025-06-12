@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 10:34:03 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/04 15:47:48 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:06:31 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	generate_map(char *map_name, t_map *map)
 {
 	int		fd;
-	int		i;
+	size_t	i;
 	char	*buffer;
 
 	fd = secure_open(map_name);

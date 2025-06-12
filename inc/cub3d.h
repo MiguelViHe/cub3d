@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/10 15:31:46 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/12 17:58:46 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	on_keypress(mlx_key_data_t keydata, void *param);
 void	on_game_loop(void *param);
 
 //map/check_map.c
-int			init_map_height(char *map_name);
+int		check_map(t_game *g);
 
 //map/generate_map.c
 void		generate_map(char *map_name, t_map *map);
@@ -44,12 +44,17 @@ void		generate_map(char *map_name, t_map *map);
 //map/map_errors.c
 void		wrong_map_exit(char *buffer, char *message, int need_free);
 void		wrong_generate_map_exit(char *message, int fd);
+void		check_arg_cub(char *name);
+
+//parse/parse_file.c
+int			parse_file(char *map_name, t_game *game);
 
 //player/calculate_player.c
 double		calc_fov_factor(double fov_degrees);
 t_vector	calc_player_dir(char dir);
 t_vector	calc_plane(t_vector dir, double fov_factor);
 void		initialize_player(t_map *map, t_player *player);
+int			is_player(char c);
 
 //player/player_movements.c
 void		rotate_player(t_game *game, double angle);
@@ -91,6 +96,9 @@ void		secure_close(int fd);
 //freeing.c
 void		free_map_array(t_map *map);
 void		free_game(t_game *game);
+void		free_char_array(char **array);
+void		free_textures(t_textures *textures);
+int			free_parse_all(t_game *game, char *message);
 
 //printer.c
 void		print_game_info(t_game *game);
@@ -104,10 +112,8 @@ void		print_game_map(char **map);
 double		deg_to_rad(double degrees);
 void		rotate_vector(t_vector *vect, double angle);
 t_vector	normalize(t_vector vect);
-
-//cub3d_test.c
-void		cast_all_rays(t_game *g);
-
+void		remove_newline(char *line);
+void		fill_with_spaces(char *dest, const char *src, int width);
 
 #endif
 

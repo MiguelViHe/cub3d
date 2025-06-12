@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 09:01:04 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/02 12:15:28 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/12 16:30:50 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,24 @@ t_vector	normalize(t_vector vect)
 		result.y = vect.y / length;
 	}
 	return (result);
+}
+
+// Función para eliminar el '\n' al final de una línea
+void remove_newline(char *line)
+{
+	int	len;
+	
+	len = ft_strlen(line);
+	if (len > 0 && line[len - 1] == '\n')
+		line[len - 1] = '\0';
+}
+
+void	fill_with_spaces(char *dest, const char *src, int width)
+{
+	int	i;
+
+	i = ft_strlcpy(dest, src, width + 1);
+	while (i < width)
+		dest[i++] = ' ';
+	dest[i] = '\0';
 }

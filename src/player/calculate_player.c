@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 10:07:01 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/10 10:36:05 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/12 17:53:34 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,30 +48,34 @@ t_vector	calc_plane(t_vector dir, double fov_factor)
 	return (plane);
 }
 
+int	is_player(char c)
+{
+	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
+}
+
 void	initialize_player(t_map *map, t_player *player)
 {
-	int		i;
-	int		j;
+	int		y;
+	int		x;
 	int		found;
 
-	i = 0;
+	y = 0;
 	found = 0;
-	while (!found && map->matrix[i])
+	while (!found && map->matrix[y])
 	{
-		j = 0;
-		while (!found && map->matrix[i][j] && map->matrix[i][j] != '\n')
+		x = 0;
+		while (!found && map->matrix[y][x] && map->matrix[y][x] != '\n')
 		{
-			if (map->matrix[i][j] == 'N' || map->matrix[i][j] == 'S' 
-				|| map->matrix[i][j] == 'E' || map->matrix[i][j] == 'W')
+			if (is_player(map->matrix[y][x]))
 			{
-				player->pos.x = j + 0.5;
-				player->pos.y = i + 0.5;
-				player->dir = calc_player_dir(map->matrix[i][j]);
-				map->matrix[i][j] = '0'; // quitar el simbolo de inicio del jugador del mapa.
+				player->pos.x = x + 0.5;
+				player->pos.y = y + 0.5;
+				player->dir = calc_player_dir(map->matrix[y][x]);
+				map->matrix[y][x] = '0'; // quitar el simbolo de inicio del jugador del mapa.
 				found = 1;
 			}
-			j++;
+			x++;
 		}
-		i++;
+		y++;
 	}
 }
