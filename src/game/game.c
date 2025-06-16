@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 12:43:48 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/10 15:32:19 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:54:42 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 int	launch_game(t_game *g)
 {
 	ft_memset(&g->data, 0, sizeof(t_data));
-	g->data.mlx = mlx_init(screenWidth, screenHeight, "mvidal-h", false);
+	mlx_set_setting(MLX_STRETCH_IMAGE, true);
+	mlx_set_setting(MLX_FULLSCREEN, true);
+	g->data.mlx = mlx_init(screenWidth, screenHeight, "mvidal-h", true);
 	if (!g->data.mlx)
 	{
 		ft_fdprintf(2, mlx_strerror(mlx_errno));
