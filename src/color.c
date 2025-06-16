@@ -6,11 +6,13 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:50:11 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/09 16:10:19 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:33:01 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+//CREATE_COLOR O ALGO ASI
 
 uint32_t	get_wall_color(t_game *g, t_coord map)
 {

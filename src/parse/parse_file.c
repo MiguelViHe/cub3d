@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:40:59 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/12 18:26:18 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:33:31 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	set_texture(char **tokens, t_textures *textures)
 		textures->WE = ft_strdup(tokens[1]);
 	else if (strncmp(tokens[0], "EA", 2) == 0 && !textures->EA)
 		textures->EA = ft_strdup(tokens[1]);
-	else if (strncmp(tokens[0], "F", 1) == 0 && !textures->F)
+	else if (strncmp(tokens[0], "F", 1) == 0 && !textures->F) //CREAR EL COLOR EN DRAW
 		textures->F = ft_strdup(tokens[1]);
-	else if (strncmp(tokens[0], "C", 1) == 0 && !textures->C)
+	else if (strncmp(tokens[0], "C", 1) == 0 && !textures->C) //CREAR EL COLOR EN DRAW
 		textures->C = ft_strdup(tokens[1]);
 	else
 	{
