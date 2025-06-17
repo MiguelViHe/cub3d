@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:33:56 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/10 15:04:04 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/17 17:25:34 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	draw_ceiling(mlx_image_t* img, int x, t_screenline draw)
 	index = 0;
 	while (index < draw.start)
 	{
-		mlx_put_pixel(img, x, index, draw.color_ceiling);
+		// printf("ceiling color: 0x%08X\n", *draw.color_ceiling);
+		mlx_put_pixel(img, x, index, *draw.color_ceiling);
 		index++;
 	}
 }
@@ -31,7 +32,8 @@ void	draw_floor(mlx_image_t* img, int x, t_screenline draw)
 	index = draw.end + 1;
 	while (index <= screenHeight - 1)
 	{
-		mlx_put_pixel(img, x, index, draw.color_floor);
+		// printf("floor color: 0x%08X\n", *draw.color_floor);
+		mlx_put_pixel(img, x, index, *draw.color_floor);
 		index++;
 	}
 }
@@ -67,6 +69,6 @@ void	calc_draw_line(t_game *g, t_ray *ray)
 	if (ray->draw.end >= screenHeight)
 		ray->draw.end = screenHeight - 1;
 	ray->draw.color_wall = set_color_line(g, ray->map, ray->side);
-	ray->draw.color_floor = darken_color(0xFFFFFFFF);
-	ray->draw.color_ceiling = 0x00000000;
+	ray->draw.color_floor = &g->data.color_floor; //Punteros a los clorores ya calculados
+	ray->draw.color_ceiling = &g->data.color_ceiling; //Punteros a los clorores ya calculados
 }

@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 10:00:24 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/10 15:33:41 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/17 09:34:53 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	print_game_map(char **map)
 			j++;
 		}
 		i++;
+		ft_printf("\n");
 	}
 	ft_printf("\n");
 }

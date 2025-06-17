@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/12 17:58:46 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/17 17:04:09 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void		cast_all_rays(t_game *g);
 int			dir_ok(char *dir);
 
 //color.c
+int			set_surface_color(t_game *g, char surface);
 uint32_t	set_color_line(t_game *g, t_coord map, int wall_side);
 uint32_t	darken_color(uint32_t color);
 
@@ -98,7 +99,7 @@ void		free_map_array(t_map *map);
 void		free_game(t_game *game);
 void		free_char_array(char **array);
 void		free_textures(t_textures *textures);
-int			free_parse_all(t_game *game, char *message);
+int			free_all(t_game *game, char **tokens, char *message);
 
 //printer.c
 void		print_game_info(t_game *game);

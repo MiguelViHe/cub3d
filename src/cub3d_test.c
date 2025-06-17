@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 15:49:22 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/12 18:02:32 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/17 17:30:33 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_game	init_game(char *map_name)
 	ft_memset(&game, 0, sizeof(t_game));
 	if (parse_file(map_name, &game) < 0)
 		(ft_fdprintf(2, "Error parsing %s\n", map_name), exit(EXIT_FAILURE));
+	printf("Map parsed successfully.\n");
 	initialize_player(&game.map, &game.player);
 	game.fov_degrees = 66;
 	game.fov_factor = calc_fov_factor(game.fov_degrees);
@@ -37,8 +38,8 @@ int	main(int argc, char *argv[])
 	}
 	check_arg_cub(argv[1]);
 	game = init_game(argv[1]);
+	// print_game_map(game.map.matrix);
 	// print_game_info(&game);
-	print_game_map(game.map.matrix);
 	launch_game(&game);
 	return (0);
 }

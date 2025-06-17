@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:56:52 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/12 18:25:06 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/17 16:57:05 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ typedef struct	s_data
 	int32_t			screen_width; //No se si es necesario, pero lo dejo por si acaso
 	int32_t			screen_height; // No se si es necesario, pero lo dejo por si acasou
 	t_textures		textures; //quizas añadir la textura en archivo posteriormente.
+	uint32_t		color_floor;
+	uint32_t		color_ceiling;
 }				t_data;
 
 typedef struct	s_input
@@ -95,8 +97,8 @@ typedef struct	s_screenline
 	int			start;
 	int			end;
 	uint32_t	color_wall;
-	uint32_t	color_floor;
-	uint32_t	color_ceiling;
+	uint32_t	*color_floor;
+	uint32_t	*color_ceiling;
 }				t_screenline;
 
 typedef struct	s_ray
