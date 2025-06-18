@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:40:59 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/17 18:41:08 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/18 16:10:23 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,16 @@ int	set_texture(char **tokens, t_game *g)
 	else if (strncmp(tokens[0], "F", 1) == 0 && !g->data.textures.F)
 	{
 		g->data.textures.F = ft_strdup(tokens[1]); //aqui y ademas trim en colores
-		return (set_surface_color(g, 'F'));
+		return (free_char_array(tokens), set_surface_color(g, 'F'));
 	}
 	else if (strncmp(tokens[0], "C", 1) == 0 && !g->data.textures.C)
 	{
 		g->data.textures.C = ft_strdup(tokens[1]);
-		return (set_surface_color(g, 'C'));
+		return (free_char_array(tokens), set_surface_color(g, 'C'));
 	}
 	else
 		return (free_all(g, tokens, "Invalid texture or color format"));
-	return (0);
+	return (free_char_array(tokens), 0);
 }
 
 int	is_map_line(char *line)
