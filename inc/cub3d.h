@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/17 17:04:09 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/20 13:50:36 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,14 @@ void		raycast_dda(t_ray *ray, t_game *g);
 //ray/raycast.c
 void		cast_all_rays(t_game *g);
 
+//textures/textures.c
+int			ft_load_texture(t_game *g, t_textures *texture);
+
 //checkers.c
 int			dir_ok(char *dir);
 
 //color.c
-int			set_surface_color(t_game *g, char surface);
+int			set_surface_color(t_game *g, int s);
 uint32_t	set_color_line(t_game *g, t_coord map, int wall_side);
 uint32_t	darken_color(uint32_t color);
 

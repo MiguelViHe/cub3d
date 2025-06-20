@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:31:46 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/17 12:21:34 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/20 11:50:58 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,23 @@
 
 void	free_textures(t_textures *textures)
 {
-	if (textures->NO)
-		free(textures->NO);
-	if (textures->SE)
-		free(textures->SE);
-	if (textures->WE)
-		free(textures->WE);
-	if (textures->EA)
-		free(textures->EA);
-	if (textures->F)
-		free(textures->F);
-	if (textures->C)
-		free(textures->C);
-	textures->NO = NULL;
-	textures->SE = NULL;
-	textures->WE = NULL;
-	textures->EA = NULL;
-	textures->F = NULL;
-	textures->C = NULL;
+	int	i;
+
+	i = 0;
+	while (i < TEXTURE_COUNT)
+	{
+		if (textures[i].texture)
+		{
+			mlx_delete_texture(textures[i].texture);
+			textures[i].texture = NULL;
+		}
+		if (textures[i].path)
+		{
+			free(textures[i].path);
+			textures[i].path = NULL;
+		}
+		i++;
+	}
 }
 
 int	free_all(t_game *game, char **tokens, char *message)
@@ -39,7 +38,7 @@ int	free_all(t_game *game, char **tokens, char *message)
 	if (tokens)
 		free_char_array(tokens);
 	free_map_array(&game->map);
-	free_textures(&game->data.textures);
+	free_textures(game->map.textures);
 	ft_lstclear(&game->map.map_list, free);
 	if (message)
 		ft_fdprintf(2, "Error\n%s\n", message);

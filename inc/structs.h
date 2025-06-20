@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:56:52 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/17 16:57:05 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/20 13:54:53 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,25 @@
 
 # include "MLX42.h"
 # include "libft.h"
+
+typedef enum e_texture
+{
+    NO,
+    SO,
+    WE,
+    EA,
+    F,
+    C,
+    TEXTURE_COUNT
+}	t_texture;
+
+typedef struct	s_textures
+{
+	char			*path;
+	mlx_texture_t	*texture;
+	uint32_t		color;
+}				t_textures;
+
 typedef struct	s_vector
 {
 	double		x;
@@ -48,27 +67,16 @@ typedef struct	s_map
 	int			player_count;
 	t_list		*map_list;
 	char		**matrix;
+	t_textures	textures[TEXTURE_COUNT];
 
 }				t_map;
 
-typedef struct	s_textures
-{
-	char	*NO;
-	char	*SE;
-	char	*WE;
-	char	*EA;
-	char	*F;
-	char	*C;
-}				t_textures;
 typedef struct	s_data
 {
 	mlx_t			*mlx;
 	mlx_image_t		*img;
 	int32_t			screen_width; //No se si es necesario, pero lo dejo por si acaso
 	int32_t			screen_height; // No se si es necesario, pero lo dejo por si acasou
-	t_textures		textures; //quizas añadir la textura en archivo posteriormente.
-	uint32_t		color_floor;
-	uint32_t		color_ceiling;
 }				t_data;
 
 typedef struct	s_input

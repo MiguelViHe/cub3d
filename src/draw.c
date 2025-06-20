@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:33:56 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/17 17:25:34 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/20 13:58:22 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,6 @@ void	calc_draw_line(t_game *g, t_ray *ray)
 	if (ray->draw.end >= screenHeight)
 		ray->draw.end = screenHeight - 1;
 	ray->draw.color_wall = set_color_line(g, ray->map, ray->side);
-	ray->draw.color_floor = &g->data.color_floor; //Punteros a los clorores ya calculados
-	ray->draw.color_ceiling = &g->data.color_ceiling; //Punteros a los clorores ya calculados
+	ray->draw.color_floor = &g->map.textures[F].color; //Punteros a los clorores ya calculados
+	ray->draw.color_ceiling = &g->map.textures[C].color; //Punteros a los clorores ya calculados
 }

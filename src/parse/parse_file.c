@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:40:59 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/18 16:10:23 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/20 14:04:08 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,39 @@
 
 int	all_elem(t_textures *textures)
 {
-	if (textures->NO && textures->SE && textures->WE && textures->EA
-		&& textures->F && textures->C)
+	if (textures[NO].path && textures[SO].path &&
+		textures[WE].path && textures[EA].path &&
+		textures[F].path && textures[C].path)
 		return (1);
 	return (0);
 }
 
 int	set_texture(char **tokens, t_game *g)
-{
+{	
+	int	tex_id;
+	
 	if (!tokens || !tokens[0] || !tokens[1] || tokens[2])
 		return (free_all(g, tokens, "bad format in texture"));
-	if (strncmp(tokens[0], "NO", 2) == 0 && !g->data.textures.NO)
-		g->data.textures.NO = ft_strdup(tokens[1]);
-	else if (strncmp(tokens[0], "SO", 2) == 0 && !g->data.textures.SE)
-		g->data.textures.SE = ft_strdup(tokens[1]);
-	else if (strncmp(tokens[0], "WE", 2) == 0 && !g->data.textures.WE)
-		g->data.textures.WE = ft_strdup(tokens[1]);
-	else if (strncmp(tokens[0], "EA", 2) == 0 && !g->data.textures.EA)
-		g->data.textures.EA = ft_strdup(tokens[1]);
-	else if (strncmp(tokens[0], "F", 1) == 0 && !g->data.textures.F)
-	{
-		g->data.textures.F = ft_strdup(tokens[1]); //aqui y ademas trim en colores
-		return (free_char_array(tokens), set_surface_color(g, 'F'));
-	}
-	else if (strncmp(tokens[0], "C", 1) == 0 && !g->data.textures.C)
-	{
-		g->data.textures.C = ft_strdup(tokens[1]);
-		return (free_char_array(tokens), set_surface_color(g, 'C'));
-	}
+	tex_id = -1;
+	if (strncmp(tokens[0], "NO", 2) == 0 && !g->map.textures[NO].path)
+		tex_id = NO;
+	else if (strncmp(tokens[0], "SO", 2) == 0 && !g->map.textures[SO].path)
+		tex_id = SO;
+	else if (strncmp(tokens[0], "WE", 2) == 0 && !g->map.textures[WE].path)
+		tex_id = WE;
+	else if (strncmp(tokens[0], "EA", 2) == 0 && !g->map.textures[EA].path)
+		tex_id = EA;
+	else if (strncmp(tokens[0], "F", 1) == 0 && !g->map.textures[F].path)
+		tex_id = F;
+	else if (strncmp(tokens[0], "C", 1) == 0 && !g->map.textures[C].path)	
+		tex_id = C;
 	else
 		return (free_all(g, tokens, "Invalid texture or color format"));
-	return (free_char_array(tokens), 0);
+	g->map.textures[tex_id].path = ft_strdup(tokens[1]);
+	free_char_array(tokens);
+	if (tex_id == C || tex_id == F)
+		return (set_surface_color(g, tex_id));
+	return (ft_load_texture(g, &g->map.textures[tex_id]));
 }
 
 int	is_map_line(char *line)
@@ -111,7 +113,7 @@ int	parse_line(char *line, t_game *g)
 	is_mapline = is_map_line(line);
 	if (is_mapline)
 	{
-		if (!all_elem(&g->data.textures))
+		if (!all_elem(g->map.textures))
 			return (free_all(g, NULL, "Map is not the last element"));
 		return (adding_map_line(line, g));
 	}
@@ -144,7 +146,7 @@ int	parse_file(char *map_name, t_game *game)
 	secure_close(fd);
 	if (error)
 		return (error);
-	if (!all_elem(&game->data.textures) && game->map.map_list == NULL)
+	if (!all_elem(game->map.textures) && game->map.map_list == NULL)
 		return (free_all(game, NULL, "All elemensts are needed"));
 	return (check_map(game));
 }
