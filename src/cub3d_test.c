@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 15:49:22 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/17 17:30:33 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/20 14:58:08 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_game	init_game(char *map_name)
 		(ft_fdprintf(2, "Error parsing %s\n", map_name), exit(EXIT_FAILURE));
 	printf("Map parsed successfully.\n");
 	initialize_player(&game.map, &game.player);
-	game.fov_degrees = 66;
+	game.fov_degrees = FOV_DEGREES;
 	game.fov_factor = calc_fov_factor(game.fov_degrees);
 	game.player.plane = calc_plane(game.player.dir, game.fov_factor);
 	return (game);

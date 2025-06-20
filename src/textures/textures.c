@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 12:11:16 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/20 13:09:47 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/20 14:21:24 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,20 @@ int ft_load_texture(t_game *g, t_textures *texture)
 	return (0);
 }
 
-// int ft_init_textures(t_game *game, t_map *map)
-// {
-// 	int	i;
-	
-// 	i = 0;
-// 	while (i < TEXTURE_COUNT - 2) // Exclude F and C
-// 	{
-// 		printf("Loading texture %d: %s\n", i, map->textures[i].path);
-// 		if (ft_load_texture(game, &map->textures[i]) < 0)
-// 			return (-1);
-// 		i++;
-// 	}
-// 	return (0);
-// }
+int	get_texture_direction(int side, t_vector ray_dir)
+{
+	if (side == 0)
+	{
+		if (ray_dir.x < 0)
+			return (EA);
+		else
+			return (WE);
+	}
+	else
+	{
+		if (ray_dir.y < 0)
+			return (SO);
+		else
+			return (NO);
+	}
+}

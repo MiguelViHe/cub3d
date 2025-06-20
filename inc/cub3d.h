@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/20 13:50:36 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/20 15:17:13 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,21 @@
 # define M_PI 3.14159265358979323846
 #endif
 
-#define screenWidth 1920
-#define screenHeight 1080
+# define	TITLE "Cub3D"
+# define	TILE_SIZE 64
+
+//configuration 
+# define	TEXTURES FALSE
+# define	MINIMAP FALSE
+
+// Player configuration
+# define	PLAYER_SPEED 3.0
+# define	PLAYER_ROTATION_SPEED 1.5
+# define	FOV_DEGREES 66.0
+
+// Raycasting configuration
+#define		screenWidth 1920
+#define		screenHeight 1080
 
 #ifndef CUBE3D_H
 # define CUBE3D_H
@@ -80,6 +93,10 @@ void		cast_all_rays(t_game *g);
 
 //textures/textures.c
 int			ft_load_texture(t_game *g, t_textures *texture);
+int			get_texture_direction(int side, t_vector ray_dir);
+
+//textures/calculate_texture.c
+void		calc_wallx_and_texx(t_game *g, t_ray *ray);
 
 //checkers.c
 int			dir_ok(char *dir);

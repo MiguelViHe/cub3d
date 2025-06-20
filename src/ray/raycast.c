@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 14:45:42 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/17 17:32:43 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/20 15:19:21 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	cast_all_rays(t_game *g)
 		ray.dir = calc_ray_dir(g->player.dir, g->player.plane, ray.cameraX);
 		setup_dda(&ray, g);
 		raycast_dda(&ray, g);
+		ray.texture_dir = get_texture_direction(ray.side, ray.dir);
+		calc_wallx_and_texx(g, &ray);
 		calc_draw_line(g, &ray);
 		draw_vertical_line(g->data.img, x, ray.draw);
 		// printf("cameraX = %.5f, Columna %d: rayDirX = %.5f, rayDirY = %.5f ", ray.cameraX, x, ray.dir.x, ray.dir.y);

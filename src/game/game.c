@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 12:43:48 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/17 17:35:14 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/20 14:14:50 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@ int	launch_game(t_game *g)
 	mlx_get_monitor_size(0, &g->data.screen_width, &g->data.screen_height);
 	mlx_image_to_window(g->data.mlx, g->data.img, 0, 0);
 	cast_all_rays(g);
-	// verify_map_size(&data);
-	// load_images(&data);
-	// images_to_map(&data);
 	mlx_key_hook(g->data.mlx, on_keypress, g);
 	mlx_close_hook(g->data.mlx, on_destroy, g);
 	mlx_loop_hook(g->data.mlx, on_game_loop, g);

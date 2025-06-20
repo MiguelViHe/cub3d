@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:33:56 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/20 13:58:22 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/20 16:29:55 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,31 @@ void	draw_floor(mlx_image_t* img, int x, t_screenline draw)
 
 void	draw_wall(mlx_image_t* img, int x, t_screenline draw)
 {
-	int	index;
+	double	tex_step;
+	double	tex_pos;
+	int		index;
 	
+	tex_step = (double)TILE_SIZE / (draw.end - draw.start); // +1 ?
+	tex_pos = (draw.start - screenHeight / 2 + (draw.end - draw.start) / 2.0) * tex_step;
 	index = draw.start;
+	// while (index <= draw.end)
+	// {
+	// 	mlx_put_pixel(img, x, index, draw.color_wall);
+	// 	index++;
+	// }
 	while (index <= draw.end)
 	{
-		mlx_put_pixel(img, x, index, draw.color_wall);
-		index++;
+		draw.tex->y = (int)tex_pos & (TILE_SIZE - 1);
+		tex_pos += tex_step;
+		if (TEXTURES) // POR AQUI. ME DA ERROR DE QUE NO SE RECONOCE FALSE........ de aqui para abajo ajustar
+			uint32_t color = textures[tex_id][TILE_SIZE * texY + texX];
+		if (side == 1)
+			color = (color >> 1) & 0x7F7F7F;
+
+		mlx_put_pixel(img, x, y, color);
+		y++;
 	}
+}
 }
 
 void	draw_vertical_line(mlx_image_t* img, int x, t_screenline draw)
@@ -71,4 +88,7 @@ void	calc_draw_line(t_game *g, t_ray *ray)
 	ray->draw.color_wall = set_color_line(g, ray->map, ray->side);
 	ray->draw.color_floor = &g->map.textures[F].color; //Punteros a los clorores ya calculados
 	ray->draw.color_ceiling = &g->map.textures[C].color; //Punteros a los clorores ya calculados
+	ray->draw.tex = &ray->tex; // Puntero a la coordenada de textura
+	ray->draw.tex_id = &ray->texture_dir; // Puntero al identificador de la textura a usar
+	ray->draw.darken = &ray->side; // Puntero a la variable side que indica si se debe oscurecer la textura
 }

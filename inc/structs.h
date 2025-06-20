@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:56:52 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/20 13:54:53 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/20 16:00:04 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,9 @@ typedef struct	s_screenline
 	uint32_t	color_wall;
 	uint32_t	*color_floor;
 	uint32_t	*color_ceiling;
+	t_coord		*tex;			// puntero a coordenada horizontal de la textura en t_ray
+	int			*tex_id;			// puntero índice de la textura (N, S, E, O) en t_ray
+	int			*darken; 		// 1 si se debe oscurecer la textura, 0 si no. puntero a side en t_ray
 }				t_screenline;
 
 typedef struct	s_ray
@@ -121,6 +124,9 @@ typedef struct	s_ray
 	int				hit;			// 0 si aun no ha chocado con un muro, 1 si ha chocado.
 	double			perpWallDist;	// distancia corregida hasta la pared perpendicular a plane.
 	t_screenline	draw;			// inicio y final de pintado de una linea de pantalla respecto a la distancia del muro.
+	int				texture_dir;	// id de la textura a usar para pintar el muro.
+	double			wallX;			// Punto exacto de impacto del rayo dentro de la celda del muro (0.0 - 1.0)
+	t_coord			tex;			// Columna de textura que se usará para esta franja vertical
 }				t_ray;
 
 #endif // STRUCTS_H
