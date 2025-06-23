@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/20 15:17:13 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/23 18:44:51 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 # define M_PI 3.14159265358979323846
 #endif
 
+#ifndef CUBE3D_H
+# define CUBE3D_H
+
 # define	TITLE "Cub3D"
 # define	TILE_SIZE 64
 
 //configuration 
-# define	TEXTURES FALSE
-# define	MINIMAP FALSE
+# define	TEXTURES true
+# define	MINIMAP false
 
 // Player configuration
 # define	PLAYER_SPEED 3.0
@@ -27,11 +30,8 @@
 # define	FOV_DEGREES 66.0
 
 // Raycasting configuration
-#define		screenWidth 1920
-#define		screenHeight 1080
-
-#ifndef CUBE3D_H
-# define CUBE3D_H
+#define		screenW 1920
+#define		screenH 1080
 
 # include <stdio.h>
 # include <stdlib.h> //atoi, atof
@@ -97,6 +97,8 @@ int			get_texture_direction(int side, t_vector ray_dir);
 
 //textures/calculate_texture.c
 void		calc_wallx_and_texx(t_game *g, t_ray *ray);
+void		calc_step_and_pos(double *step, double *pos, int start, int end);
+void		calc_tex_inf(t_game *g, t_ray *ray);
 
 //checkers.c
 int			dir_ok(char *dir);
@@ -107,7 +109,7 @@ uint32_t	set_color_line(t_game *g, t_coord map, int wall_side);
 uint32_t	darken_color(uint32_t color);
 
 //draw.c
-void		draw_vertical_line(mlx_image_t*	img, int x, t_screenline draw);
+void		draw_vertical_line(t_game *g, int x, t_screenline *d, t_tex_inf *ti);
 void		calc_draw_line(t_game *g, t_ray *ray);
 
 //files.c

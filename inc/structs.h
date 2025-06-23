@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:56:52 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/20 16:00:04 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/23 18:26:22 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,19 @@
 
 # include "MLX42.h"
 # include "libft.h"
+
+
+typedef struct	s_vector
+{
+	double		x;
+	double		y;
+}				t_vector;
+
+typedef struct	s_coord
+{
+	int			x;
+	int			y;
+}				t_coord;
 
 typedef enum e_texture
 {
@@ -34,17 +47,16 @@ typedef struct	s_textures
 	uint32_t		color;
 }				t_textures;
 
-typedef struct	s_vector
+typedef struct	s_tex_inf
 {
-	double		x;
-	double		y;
-}				t_vector;
-
-typedef struct	s_coord
-{
-	int			x;
-	int			y;
-}				t_coord;
+	int				tx_dir;		// id de la textura a usar para pintar el muro.
+	mlx_texture_t	*mlx_tx;	// Puntero a la textura que indica texture_id.
+	double			wallX;		// Punto exacto de impacto del rayo dentro de la celda del muro (0.0 - 1.0)
+	t_coord			tx;			// Columna de textura que se usará para esta franja vertical
+	double			tx_step;	// Cuántos píxeles de textura avanzamos por cada píxel vertical en pantalla
+	double			tx_pos;		// Posición inicial en la textura.
+	int				pixel_index; // Índice del píxel en la textura (para acceder a los colores)
+}				t_tex_inf;
 
 // typedef struct	s_time
 // {
@@ -62,8 +74,8 @@ typedef struct	s_player
 
 typedef struct	s_map
 {
-	size_t			height;
-	size_t			width;
+	size_t		height;
+	size_t		width;
 	int			player_count;
 	t_list		*map_list;
 	char		**matrix;
@@ -107,9 +119,6 @@ typedef struct	s_screenline
 	uint32_t	color_wall;
 	uint32_t	*color_floor;
 	uint32_t	*color_ceiling;
-	t_coord		*tex;			// puntero a coordenada horizontal de la textura en t_ray
-	int			*tex_id;			// puntero índice de la textura (N, S, E, O) en t_ray
-	int			*darken; 		// 1 si se debe oscurecer la textura, 0 si no. puntero a side en t_ray
 }				t_screenline;
 
 typedef struct	s_ray
@@ -124,9 +133,7 @@ typedef struct	s_ray
 	int				hit;			// 0 si aun no ha chocado con un muro, 1 si ha chocado.
 	double			perpWallDist;	// distancia corregida hasta la pared perpendicular a plane.
 	t_screenline	draw;			// inicio y final de pintado de una linea de pantalla respecto a la distancia del muro.
-	int				texture_dir;	// id de la textura a usar para pintar el muro.
-	double			wallX;			// Punto exacto de impacto del rayo dentro de la celda del muro (0.0 - 1.0)
-	t_coord			tex;			// Columna de textura que se usará para esta franja vertical
+	t_tex_inf		tex_info;		// Información de textura para pintar el muro.
 }				t_ray;
 
 #endif // STRUCTS_H

@@ -1,24 +1,24 @@
 
-SO        ./assets/textures/so.png
+SO        ./assets/textures/greystone.png
 
 
 
-NO ./assets/textures/no.png
+NO ./assets/textures/purplestone.png
 
 
-WE ./assets/textures/we.png
+WE ./assets/textures/mossy.png
 
 
-EA ./assets/textures/ea.png
+EA ./assets/textures/eagle.png
 
-F     28,30,234
+F     180,30,234
 
 
-C     14,14,49
+C     30,14,49
 
 11111111111111111111
 10000000000000100001
-10S01000000000000001
+100010000N0000000001
 1001 100000000111011
 10001000000000000001
 10000000000000100001

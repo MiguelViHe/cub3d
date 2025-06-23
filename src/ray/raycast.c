@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 14:45:42 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/20 15:19:21 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/23 18:37:34 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ void	cast_all_rays(t_game *g)
 
 	ft_memset(&ray, 0, sizeof(t_ray));
 	x = 0;
-	while (x < screenWidth)
+	while (x < screenW)
 	{
 		ray.cameraX = calc_cameraX(x);
 		ray.dir = calc_ray_dir(g->player.dir, g->player.plane, ray.cameraX);
 		setup_dda(&ray, g);
 		raycast_dda(&ray, g);
-		ray.texture_dir = get_texture_direction(ray.side, ray.dir);
-		calc_wallx_and_texx(g, &ray);
 		calc_draw_line(g, &ray);
-		draw_vertical_line(g->data.img, x, ray.draw);
+		if (TEXTURES)
+			calc_tex_inf(g, &ray);
+		draw_vertical_line(g, x, &ray.draw, &ray.tex_info);
 		// printf("cameraX = %.5f, Columna %d: rayDirX = %.5f, rayDirY = %.5f ", ray.cameraX, x, ray.dir.x, ray.dir.y);
 		// printf("||||| deltaX = %.5f , deltaY = %.5f ", ray.delta_dist.x, ray.delta_dist.y);
 		// printf("||||| stepX = %d , stepY = %d ", ray.step.x, ray.step.y);
