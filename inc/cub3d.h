@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/25 16:58:53 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/25 18:15:01 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ t_vector	normalize(t_vector vect);
 // utils.c
 int			ft_clamp(int value, int min, int max);
 void		remove_newline(char *line);
+char		*remove_spaces(char *str);
 void		fill_with_spaces(char *dest, const char *src, int width);
 int			sign(double x);
 

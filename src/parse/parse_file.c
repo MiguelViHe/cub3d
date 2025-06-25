@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:40:59 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/20 14:04:08 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/25 18:20:07 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,11 @@ int	adding_map_line(char *line, t_game *g)
 	return (0); // valid map line, continue checking
 }
 
+
 int	parse_line(char *line, t_game *g)
 {
 	char	**tokens;
-	int		is_mapline;
+	char	*cleaned;
 
 	if (line[0] == '\n')
 	{
@@ -110,19 +111,21 @@ int	parse_line(char *line, t_game *g)
 		return (free_all(g, NULL, "Empty line after map beginning"));
 	}
 	remove_newline(line);
-	is_mapline = is_map_line(line);
-	if (is_mapline)
+	if (is_map_line(line))
 	{
 		if (!all_elem(g->map.textures))
 			return (free_all(g, NULL, "Map is not the last element"));
 		return (adding_map_line(line, g));
 	}
-	if (!is_mapline && g->map.map_list != NULL)
+	if (g->map.map_list != NULL)
 		return (free_all(g, NULL, "Bad elements in map"));
-	tokens = ft_split(line, ' ');
+	cleaned = remove_spaces(line);
+	if (!cleaned)
+		return (free_all(g, NULL, "Removing spaces from line"));
+	tokens = ft_split(cleaned, ' ');
 	if (tokens == NULL)
-		return (free_all(g, NULL, "Checking texture or color"));
-	return (set_texture(tokens, g));
+		return (free(cleaned), free_all(g, NULL, "Checking texture or color"));
+	return (free(cleaned), set_texture(tokens, g));
 }
 
 int	parse_file(char *map_name, t_game *game)
@@ -139,7 +142,8 @@ int	parse_file(char *map_name, t_game *game)
 	while (buffer && !error)
 	{
 		error = parse_line(buffer, game);
-		free(buffer);
+		if (buffer)
+			free(buffer);
 		if (!error)
 			buffer = get_next_line(fd);
 	}
