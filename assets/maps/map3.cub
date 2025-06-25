@@ -1,20 +1,21 @@
 
-SO        ./assets/textures/no2.png
+SO        ./assets/textures/lava_3.png
 
 
 
-NO ./assets/textures/no2.png
+NO ./assets/textures/lava_3.png
 
 
-WE ./assets/textures/ea2.png
+WE ./assets/textures/lava_3.png
 
 
-EA ./assets/textures/ea2.png
+EA ./assets/textures/lava_3.png
 
-F     180,30,234
+C        33,33,33  
 
 
-C     30,14,49
+F        66,73,73  
+
 
 11111111111111111111
 10000000000000100001

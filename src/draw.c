@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:33:56 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/25 15:01:07 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/25 16:55:58 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,11 @@ void	set_color_texture(t_screenline *d, t_tex_inf *ti)
 	uint8_t b;
 	uint8_t a;
 
-	// seria lo mismo que ti->tx.y = ft_clamp((int)ti->tx_pos, 0, TILE_SIZE - 1);
-	ti->tx.y = (int)ti->tx_pos & (TILE_SIZE - 1); 
+	//La linea de abajo podria ser:
+	// ti->tx.y = (int)ti->tx_pos & (TILE_SIZE - 1); si usaramos TILE_SIZE
+	// Aunque de esa manera todas las texturas deberian tener el mismo tamaño
+	// y ser potencias de 2.
+	ti->tx.y = ft_clamp((int)ti->tx_pos, 0, ti->mlx_tx->height - 1);
 	ti->tx_pos += ti->tx_step;
 	ti->pixel_index = (ti->tx.y * ti->mlx_tx->width + ti->tx.x) * 4;
 			

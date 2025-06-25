@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/25 15:19:08 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/25 16:58:53 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define CUBE3D_H
 
 # define	TITLE "Cub3D"
-# define	TILE_SIZE 1024
+# define	TILE_SIZE 2048 //No usada. leer draw.c
 
 //configuration 
 # define	TEXTURES true
@@ -104,7 +104,7 @@ int			get_texture_direction(int side, t_vector ray_dir);
 
 //textures/calculate_texture.c
 void		calc_wallx_and_texx(t_game *g, t_ray *ray);
-void		calc_step_and_pos(double *step, double *pos, int start, int lineheight);
+void		calc_step_and_pos(double *step, double *pos, t_ray *r, int lineheight);
 void		calc_tex_inf(t_game *g, t_ray *ray);
 
 //checkers.c
