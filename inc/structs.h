@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:56:52 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/25 09:46:33 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/25 12:34:26 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ typedef struct	s_screenline
 typedef struct	s_tex_inf
 {
 	int				tx_dir;		// id de la textura a usar para pintar el muro.
-	mlx_texture_t	*mlx_tx;	// Puntero a la textura que indica texture_id.
+	mlx_texture_t	*mlx_tx;	// Puntero a la textura que indica tx_dir.
 	double			wallX;		// Punto exacto de impacto del rayo dentro de la celda del muro (0.0 - 1.0)
 	t_coord			tx;			// Columna de textura que se usará para esta franja vertical
 	double			tx_step;	// Cuántos píxeles de textura avanzamos por cada píxel vertical en pantalla

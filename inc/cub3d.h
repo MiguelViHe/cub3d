@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/25 10:24:37 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/25 15:19:08 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define CUBE3D_H
 
 # define	TITLE "Cub3D"
-# define	TILE_SIZE 64
+# define	TILE_SIZE 1024
 
 //configuration 
 # define	TEXTURES true
@@ -31,8 +31,8 @@
 # define	MARGIN_WALL 0.2 // Margin representing the body space of the player, used to avoid collisions with walls
 
 // Raycasting configuration
-#define		screenW 1024
-#define		screenH 768
+#define		screenW 1920
+#define		screenH 1080
 
 # include <stdio.h>
 # include <stdlib.h> //atoi, atof
@@ -67,8 +67,9 @@ int			parse_file(char *map_name, t_game *game);
 double		calc_fov_factor(double fov_degrees);
 t_vector	calc_player_dir(char dir);
 t_vector	calc_plane(t_vector dir, double fov_factor);
+
+//player/initialize_player.c
 void		initialize_player(t_map *map, t_player *player);
-int			is_player(char c);
 
 //player/player_movements.c
 void		rotate_player(t_game *game, double angle);
@@ -79,6 +80,8 @@ void		strafe_player_right(t_game *game, double moveSpeed);
 
 //player/player_utils.c
 void		can_walk(t_game *game, double new_x, double new_y, t_vector dir);
+int			is_wall(t_game *g, double x, double y);
+int			is_player(char c);
 
 //ray/calculate_ray.c
 double		calc_cameraX(int x);
@@ -131,10 +134,6 @@ int			free_all(t_game *game, char **tokens, char *message);
 void		print_game_info(t_game *game);
 void		print_game_map(char **map);
 
-//time.c
-// void		init_time(t_time *time);
-// void		upgrade_frameTime(t_time *time);
-
 //transform.c
 double		deg_to_rad(double degrees);
 void		rotate_vector(t_vector *vect, double angle);
@@ -144,7 +143,6 @@ t_vector	normalize(t_vector vect);
 int			ft_clamp(int value, int min, int max);
 void		remove_newline(char *line);
 void		fill_with_spaces(char *dest, const char *src, int width);
-int			is_wall(t_game *g, double x, double y);
 int			sign(double x);
 
 #endif

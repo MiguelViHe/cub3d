@@ -6,11 +6,21 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 12:39:44 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/25 10:06:41 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/25 15:15:57 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	is_player(char c)
+{
+	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
+}
+
+int	is_wall(t_game *g, double x, double y)
+{
+	return (g->map.matrix[(int)y][(int)x] != '0');
+}
 
 void	can_walk(t_game *game, double new_x, double new_y, t_vector dir)
 {

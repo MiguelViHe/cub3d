@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:33:56 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/25 10:18:45 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/25 15:01:07 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	draw_floor(mlx_image_t* img, int x, t_screenline *draw)
 	int	index;
 
 	index = draw->end + 1;
-	while (index <= screenH - 1)
+	while (index < screenH)
 	{
 		mlx_put_pixel(img, x, index, *draw->color_floor);
 		index++;
@@ -79,12 +79,8 @@ void	draw_vertical_line(t_game *g, int x, t_screenline *d, t_tex_inf *tinf)
 void	calc_draw_line(t_game *g, t_ray *ray)
 {
 	ray->draw.lineheight = (int)(screenH / ray->perpWallDist); 
-	ray->draw.start = screenH / 2 - ray->draw.lineheight / 2;
-	if (ray->draw.start < 0)
-		ray->draw.start = 0;
-	ray->draw.end = screenH / 2 + ray->draw.lineheight / 2;
-	if (ray->draw.end >= screenH)
-		ray->draw.end = screenH - 1;
+	ray->draw.start = ft_clamp(screenH / 2 - ray->draw.lineheight / 2, 0, screenH - 1);
+	ray->draw.end = ft_clamp(screenH / 2 + ray->draw.lineheight / 2, 0, screenH - 1);
 	if (!TEXTURES)
 		ray->draw.color_wall = set_color_line(g, ray->map, ray->side);
 	ray->draw.color_floor = &g->map.textures[F].color; //Punteros a los colores ya calculados

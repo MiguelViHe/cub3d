@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:37:48 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/24 11:51:56 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/25 15:14:17 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,6 @@ void	fill_with_spaces(char *dest, const char *src, int width)
 	while (i < width)
 		dest[i++] = ' ';
 	dest[i] = '\0';
-}
-
-int	is_wall(t_game *g, double x, double y)
-{
-	return (g->map.matrix[(int)y][(int)x] != '0');
 }
 
 int sign(double x)

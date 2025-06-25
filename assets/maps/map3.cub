@@ -1,15 +1,15 @@
 
-SO        ./assets/textures/greystone.png
+SO        ./assets/textures/no2.png
 
 
 
-NO ./assets/textures/purplestone.png
+NO ./assets/textures/no2.png
 
 
-WE ./assets/textures/mossy.png
+WE ./assets/textures/ea2.png
 
 
-EA ./assets/textures/eagle.png
+EA ./assets/textures/ea2.png
 
 F     180,30,234
 
