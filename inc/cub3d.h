@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/23 18:44:51 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/25 10:24:37 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,11 @@
 # define	PLAYER_SPEED 3.0
 # define	PLAYER_ROTATION_SPEED 1.5
 # define	FOV_DEGREES 66.0
+# define	MARGIN_WALL 0.2 // Margin representing the body space of the player, used to avoid collisions with walls
 
 // Raycasting configuration
-#define		screenW 1920
-#define		screenH 1080
+#define		screenW 1024
+#define		screenH 768
 
 # include <stdio.h>
 # include <stdlib.h> //atoi, atof
@@ -41,15 +42,15 @@
 # include "libft.h"
 
 //game/game.c
-int		launch_game(t_game *game);
+int			launch_game(t_game *game);
 
 //hooks/hooks.c
-void	on_destroy(void *param);
-void	on_keypress(mlx_key_data_t keydata, void *param);
-void	on_game_loop(void *param);
+void		on_destroy(void *param);
+void		on_keypress(mlx_key_data_t keydata, void *param);
+void		on_game_loop(void *param);
 
 //map/check_map.c
-int		check_map(t_game *g);
+int			check_map(t_game *g);
 
 //map/generate_map.c
 void		generate_map(char *map_name, t_map *map);
@@ -76,6 +77,9 @@ void		move_player_backward(t_game *game, double moveSpeed);
 void		strafe_player_left(t_game *game, double moveSpeed);
 void		strafe_player_right(t_game *game, double moveSpeed);
 
+//player/player_utils.c
+void		can_walk(t_game *game, double new_x, double new_y, t_vector dir);
+
 //ray/calculate_ray.c
 double		calc_cameraX(int x);
 t_vector	calc_ray_dir(t_vector dir, t_vector plane, double cameraX);
@@ -97,7 +101,7 @@ int			get_texture_direction(int side, t_vector ray_dir);
 
 //textures/calculate_texture.c
 void		calc_wallx_and_texx(t_game *g, t_ray *ray);
-void		calc_step_and_pos(double *step, double *pos, int start, int end);
+void		calc_step_and_pos(double *step, double *pos, int start, int lineheight);
 void		calc_tex_inf(t_game *g, t_ray *ray);
 
 //checkers.c
@@ -135,8 +139,13 @@ void		print_game_map(char **map);
 double		deg_to_rad(double degrees);
 void		rotate_vector(t_vector *vect, double angle);
 t_vector	normalize(t_vector vect);
+
+// utils.c
+int			ft_clamp(int value, int min, int max);
 void		remove_newline(char *line);
 void		fill_with_spaces(char *dest, const char *src, int width);
+int			is_wall(t_game *g, double x, double y);
+int			sign(double x);
 
 #endif
 

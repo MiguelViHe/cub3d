@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:33:56 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/23 18:47:01 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/25 10:18:45 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	draw_ceiling(mlx_image_t* img, int x, t_screenline *draw)
 	index = 0;
 	while (index < draw->start)
 	{
-		// printf("ceiling color: 0x%08X\n", *draw.color_ceiling);
 		mlx_put_pixel(img, x, index, *draw->color_ceiling);
 		index++;
 	}
@@ -32,7 +31,6 @@ void	draw_floor(mlx_image_t* img, int x, t_screenline *draw)
 	index = draw->end + 1;
 	while (index <= screenH - 1)
 	{
-		// printf("floor color: 0x%08X\n", *draw.color_floor);
 		mlx_put_pixel(img, x, index, *draw->color_floor);
 		index++;
 	}
@@ -45,7 +43,8 @@ void	set_color_texture(t_screenline *d, t_tex_inf *ti)
 	uint8_t b;
 	uint8_t a;
 
-	ti->tx.y = (int)ti->tx_pos & (TILE_SIZE - 1); // clamp con máscara
+	// seria lo mismo que ti->tx.y = ft_clamp((int)ti->tx_pos, 0, TILE_SIZE - 1);
+	ti->tx.y = (int)ti->tx_pos & (TILE_SIZE - 1); 
 	ti->tx_pos += ti->tx_step;
 	ti->pixel_index = (ti->tx.y * ti->mlx_tx->width + ti->tx.x) * 4;
 			
@@ -79,20 +78,15 @@ void	draw_vertical_line(t_game *g, int x, t_screenline *d, t_tex_inf *tinf)
 
 void	calc_draw_line(t_game *g, t_ray *ray)
 {
-	int	lineheight;
-
-	lineheight = (int)(screenH / ray->perpWallDist);
-	ray->draw.start = screenH / 2 - lineheight / 2;
+	ray->draw.lineheight = (int)(screenH / ray->perpWallDist); 
+	ray->draw.start = screenH / 2 - ray->draw.lineheight / 2;
 	if (ray->draw.start < 0)
 		ray->draw.start = 0;
-	ray->draw.end = screenH / 2 + lineheight / 2;
+	ray->draw.end = screenH / 2 + ray->draw.lineheight / 2;
 	if (ray->draw.end >= screenH)
 		ray->draw.end = screenH - 1;
 	if (!TEXTURES)
 		ray->draw.color_wall = set_color_line(g, ray->map, ray->side);
-	ray->draw.color_floor = &g->map.textures[F].color; //Punteros a los clorores ya calculados
-	ray->draw.color_ceiling = &g->map.textures[C].color; //Punteros a los clorores ya calculados
-	// ray->draw.tex = &ray->tex; // Puntero a la coordenada de textura
-	// ray->draw.tex_id = &ray->texture_dir; // Puntero al identificador de la textura a usar
-	// ray->draw.darken = &ray->side; // Puntero a la variable side que indica si se debe oscurecer la textura
+	ray->draw.color_floor = &g->map.textures[F].color; //Punteros a los colores ya calculados
+	ray->draw.color_ceiling = &g->map.textures[C].color; //Punteros a los colores ya calculados
 }
