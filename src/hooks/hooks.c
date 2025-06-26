@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:04:11 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/26 16:47:40 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/26 18:11:37 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,84 +40,37 @@ void	on_keypress(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_RIGHT)
 		g->input.rotate_right = pressed;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-	{
-		ft_printf("Bye!\n");
-		free_game(g);
-	}
+		process_scape_key(g);
 }
 
-void on_cursor_move2(double xpos, double ypos, void *param)
+void on_mouse_button(mouse_key_t btn, action_t act, modifier_key_t mod, void* p)
 {
-	t_game	*g;
-	double	rotSpeed;
-	double	delta_x;
-	static double	last_x = -1;
+	(void)mod;
+	t_game *g = (t_game *)p;
 
-	(void)ypos; // Unused parameter
-	g = (t_game *)param;
-	if (last_x < 0)
-		last_x = xpos;
-	else
+	if (btn == MLX_MOUSE_BUTTON_LEFT && act == MLX_PRESS)
 	{
-		delta_x = xpos - last_x;
-		ft_clamp(delta_x, -0.5, 0.5); // Clamp the delta to avoid excessive rotation
-		rotSpeed = delta_x * CURSOR_ROTATION_SPEED;
-		rotate_player(g, rotSpeed);
-		last_x = xpos;
-	}
-}
-
-void	on_cursor_move(double xpos, double ypos, void *param)
-{
-	t_game	*g;
-	double rotSpeed;
-	double	delta_x;
-	static bool skip_next = false;
-
-	(void)ypos; // Unused parameter
-	g = (t_game *)param;
-	if (skip_next)
-		skip_next = false;
-	else
-	{
-		delta_x = xpos - (screenW / 2);
-		delta_x = ft_clamp(delta_x, -50, 50); // Clamp the delta to avoid excessive rotation
-		rotSpeed = delta_x * CURSOR_ROTATION_SPEED;
-		rotate_player(g, rotSpeed);
-		skip_next = true; // Skip the next call to avoid jitter
+		mlx_set_cursor_mode(g->data.mlx, MLX_MOUSE_HIDDEN);
+		g->cursor_hidden = true;
 		mlx_set_mouse_pos(g->data.mlx, screenW / 2, screenH / 2);
 	}
-}
-
-void handle_input(t_game *g, double moveSpeed, double rotSpeed)
-{
-	if (g->input.move_forward)
-		move_player_forward(g, moveSpeed);
-	if (g->input.move_backward)
-		move_player_backward(g, moveSpeed);
-	if (g->input.move_left)
-		strafe_player_left(g, moveSpeed);
-	if (g->input.move_right)
-		strafe_player_right(g, moveSpeed);
-	if (g->input.rotate_left)
-		rotate_player(g, -rotSpeed);
-	if (g->input.rotate_right)
-		rotate_player(g, rotSpeed);
 }
 
 void on_game_loop(void *param)
 {
 	t_game	*g;
 	double	moveSpeed;
-	double	rotSpeed;
+	double	rotSpeedk;
+	double	rotSpeedm;
 
 	g = (t_game *)param;
-	// upgrade_frameTime(&g->time);
-	// printf("Frame_time: %.3f - delta_time: %.3f\n", g->time.frameTime, g->data.mlx->delta_time);
 	moveSpeed = g->data.mlx->delta_time * PLAYER_SPEED;
-	rotSpeed = g->data.mlx->delta_time * PLAYER_ROTATION_SPEED;
-	handle_input(g, moveSpeed, rotSpeed);
+	rotSpeedk = g->data.mlx->delta_time * PLAYER_ROTATION_SPEED;
+	if (g->cursor_hidden)
+	{
+		rotSpeedm = g->data.mlx->delta_time * MOUSE_ROTATION_SPEED;
+		update_mouse_rotation(g, rotSpeedm);
+	}
+	update_player_movement(g, moveSpeed, rotSpeedk);
 	cast_all_rays(g);
-	// Mostrar FPS (opcional)
-	//printf("FPS: %.1f\n", 1.0 / g->time.frameTime);
 }

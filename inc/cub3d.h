@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/26 16:45:10 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/26 18:08:14 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 // Player configuration
 # define	PLAYER_SPEED 3.0
 # define	PLAYER_ROTATION_SPEED 1.5
-# define	CURSOR_ROTATION_SPEED 0.001
+# define	MOUSE_ROTATION_SPEED 0.05
 # define	FOV_DEGREES 66.0
 # define	MARGIN_WALL 0.2 // Margin representing the body space of the player, used to avoid collisions with walls
 
@@ -49,10 +49,15 @@
 //game/game.c
 int			launch_game(t_game *game);
 
+//hooks/hooks_utils.c
+void		update_mouse_rotation(t_game *g, double rotSpeed);
+void		update_player_movement(t_game *g, double moveSpeed, double rotSpeed);
+void		process_scape_key(t_game *g);
+
 //hooks/hooks.c
 void		on_destroy(void *param);
 void		on_keypress(mlx_key_data_t keydata, void *param);
-void		on_cursor_move(double xpos, double ypos, void *param);
+void		on_mouse_button(mouse_key_t btn, action_t act, modifier_key_t mod, void *p);
 void		on_game_loop(void *param);
 
 //map/check_map.c

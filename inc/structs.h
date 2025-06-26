@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:56:52 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/25 12:34:26 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/26 17:47:39 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct	s_game
 	t_map		map;
 	t_data		data;
 	t_input		input;
+	bool		cursor_hidden;
 }				t_game;
 
 typedef struct	s_screenline
