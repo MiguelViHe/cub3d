@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/25 18:15:01 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/26 16:45:10 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,17 @@
 # define	TILE_SIZE 2048 //No usada. leer draw.c
 
 //configuration 
-# define	TEXTURES true
-# define	MINIMAP false
+# define	TEXTURES 		true
+# define	MINIMAP 		false
+
+//window configuration
+# define	STRETCH_IMAGE	true
+# define	FULLSCREEN		false
 
 // Player configuration
 # define	PLAYER_SPEED 3.0
 # define	PLAYER_ROTATION_SPEED 1.5
+# define	CURSOR_ROTATION_SPEED 0.001
 # define	FOV_DEGREES 66.0
 # define	MARGIN_WALL 0.2 // Margin representing the body space of the player, used to avoid collisions with walls
 
@@ -47,6 +52,7 @@ int			launch_game(t_game *game);
 //hooks/hooks.c
 void		on_destroy(void *param);
 void		on_keypress(mlx_key_data_t keydata, void *param);
+void		on_cursor_move(double xpos, double ypos, void *param);
 void		on_game_loop(void *param);
 
 //map/check_map.c

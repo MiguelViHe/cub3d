@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:04:11 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/20 14:59:59 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/26 16:47:40 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,49 @@ void	on_keypress(mlx_key_data_t keydata, void *param)
 	{
 		ft_printf("Bye!\n");
 		free_game(g);
+	}
+}
+
+void on_cursor_move2(double xpos, double ypos, void *param)
+{
+	t_game	*g;
+	double	rotSpeed;
+	double	delta_x;
+	static double	last_x = -1;
+
+	(void)ypos; // Unused parameter
+	g = (t_game *)param;
+	if (last_x < 0)
+		last_x = xpos;
+	else
+	{
+		delta_x = xpos - last_x;
+		ft_clamp(delta_x, -0.5, 0.5); // Clamp the delta to avoid excessive rotation
+		rotSpeed = delta_x * CURSOR_ROTATION_SPEED;
+		rotate_player(g, rotSpeed);
+		last_x = xpos;
+	}
+}
+
+void	on_cursor_move(double xpos, double ypos, void *param)
+{
+	t_game	*g;
+	double rotSpeed;
+	double	delta_x;
+	static bool skip_next = false;
+
+	(void)ypos; // Unused parameter
+	g = (t_game *)param;
+	if (skip_next)
+		skip_next = false;
+	else
+	{
+		delta_x = xpos - (screenW / 2);
+		delta_x = ft_clamp(delta_x, -50, 50); // Clamp the delta to avoid excessive rotation
+		rotSpeed = delta_x * CURSOR_ROTATION_SPEED;
+		rotate_player(g, rotSpeed);
+		skip_next = true; // Skip the next call to avoid jitter
+		mlx_set_mouse_pos(g->data.mlx, screenW / 2, screenH / 2);
 	}
 }
 
