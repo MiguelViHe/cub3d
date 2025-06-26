@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 16:54:21 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/05 15:43:35 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/23 18:23:22 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 double	calc_cameraX(int x)
 {
-	return (2 * x / (double)screenWidth - 1);
+	return (2 * x / (double)screenW - 1);
 }
 
 t_vector	calc_ray_dir(t_vector dir, t_vector plane, double cameraX)

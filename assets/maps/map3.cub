@@ -1,0 +1,25 @@
+
+SO        ./assets/textures/lava_3.png
+
+
+
+NO ./assets/textures/lava_3.png
+
+WE ./assets/textures/lava_3.png
+
+
+EA ./assets/textures/lava_3.png
+
+C        33,   33,    33  
+
+
+F        66, 73,   73  
+
+
+11111111111111111111
+10000000000000100001
+100010000N0000000001
+1001 100000000111011
+10001000000000000001
+10000000000000100001
+11111111111111111111

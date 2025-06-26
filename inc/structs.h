@@ -6,11 +6,16 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:56:52 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/10 15:29:40 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/25 12:34:26 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42.h"
+#ifndef STRUCTS_H
+# define STRUCTS_H
+
+# include "MLX42.h"
+# include "libft.h"
+
 
 typedef struct	s_vector
 {
@@ -24,12 +29,23 @@ typedef struct	s_coord
 	int			y;
 }				t_coord;
 
-// typedef struct	s_time
-// {
-// 	double		prev;
-// 	double		current;
-// 	double		frameTime;
-// }				t_time;
+typedef enum e_texture
+{
+    NO,
+    SO,
+    WE,
+    EA,
+    F,
+    C,
+    TEXTURE_COUNT
+}	t_texture;
+
+typedef struct	s_textures
+{
+	char			*path;
+	mlx_texture_t	*texture;
+	uint32_t		color;
+}				t_textures;
 
 typedef struct	s_player
 {
@@ -40,19 +56,24 @@ typedef struct	s_player
 
 typedef struct	s_map
 {
-	int			height;
+	size_t		height;
+	size_t		width;
+	int			player_count;
+	t_list		*map_list;
 	char		**matrix;
+	t_textures	textures[TEXTURE_COUNT];
+
 }				t_map;
 
 typedef struct	s_data
 {
 	mlx_t			*mlx;
 	mlx_image_t		*img;
-	int32_t			screen_width;
-	int32_t			screen_height;
+	int32_t			screen_width; //No se si es necesario, pero lo dejo por si acaso
+	int32_t			screen_height; // No se si es necesario, pero lo dejo por si acasou
 }				t_data;
 
-typedef struct s_input
+typedef struct	s_input
 {
 	bool	move_forward;
 	bool	move_backward;
@@ -60,14 +81,13 @@ typedef struct s_input
 	bool	move_right;
 	bool	rotate_left;
 	bool	rotate_right;
-}	t_input;
+}				t_input;
 
 typedef struct	s_game
 {
 	t_player	player;
 	double		fov_degrees;
 	double		fov_factor;
-	// t_time		time;
 	t_map		map;
 	t_data		data;
 	t_input		input;
@@ -77,10 +97,22 @@ typedef struct	s_screenline
 {
 	int			start;
 	int			end;
+	int			lineheight;
 	uint32_t	color_wall;
-	uint32_t	color_floor;
-	uint32_t	color_ceiling;
+	uint32_t	*color_floor;
+	uint32_t	*color_ceiling;
 }				t_screenline;
+
+typedef struct	s_tex_inf
+{
+	int				tx_dir;		// id de la textura a usar para pintar el muro.
+	mlx_texture_t	*mlx_tx;	// Puntero a la textura que indica tx_dir.
+	double			wallX;		// Punto exacto de impacto del rayo dentro de la celda del muro (0.0 - 1.0)
+	t_coord			tx;			// Columna de textura que se usará para esta franja vertical
+	double			tx_step;	// Cuántos píxeles de textura avanzamos por cada píxel vertical en pantalla
+	double			tx_pos;		// Posición inicial en la textura.
+	int				pixel_index; // Índice del píxel en la textura (para acceder a los colores)
+}				t_tex_inf;
 
 typedef struct	s_ray
 {
@@ -94,4 +126,7 @@ typedef struct	s_ray
 	int				hit;			// 0 si aun no ha chocado con un muro, 1 si ha chocado.
 	double			perpWallDist;	// distancia corregida hasta la pared perpendicular a plane.
 	t_screenline	draw;			// inicio y final de pintado de una linea de pantalla respecto a la distancia del muro.
+	t_tex_inf		tex_info;		// Información de textura para pintar el muro.
 }				t_ray;
+
+#endif // STRUCTS_H
