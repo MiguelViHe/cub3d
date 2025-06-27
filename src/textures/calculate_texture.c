@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 14:46:28 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/25 16:58:02 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/27 15:47:09 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,17 @@ void	calc_step_and_pos(double *step, double *pos, t_ray *r, int lineheight)
 	*pos = (r->draw.start - screenH / 2.0 + lineheight / 2.0) * (*step);
 }
 
-void	calc_tex_inf(t_game *g, t_ray *ray)
+int	calc_tex_inf(t_game *g, t_ray *ray)
 {
-	int		t_dir;
+	int		t_elem;
 	
-	t_dir = get_texture_direction(ray->side, ray->dir);
-	ray->tex_info.tx_dir = t_dir;
-	ray->tex_info.mlx_tx = g->map.textures[t_dir].texture;
+	t_elem = get_texture_elem_bonus(g->map.matrix[ray->map.y][ray->map.x]);
+	if (t_elem < 0 || t_elem >= TEXTURE_COUNT)
+		return (free_all(g, NULL, "Invalid texture element"));
+	ray->tex_info.tx_dir = t_elem;
+	ray->tex_info.mlx_tx = g->map.textures[t_elem].texture;
 	calc_wallx_and_texx(g, ray);
 	calc_step_and_pos(&ray->tex_info.tx_step, &ray->tex_info.tx_pos, 
 		ray, ray->draw.lineheight);
+	return (0);
 }

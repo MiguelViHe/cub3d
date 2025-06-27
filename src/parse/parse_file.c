@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:40:59 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/25 18:20:07 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/27 15:35:25 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	all_elem(t_textures *textures)
 {
-	if (textures[NO].path && textures[SO].path &&
-		textures[WE].path && textures[EA].path &&
+	if (textures[E1].path && textures[E2].path &&
+		textures[E3].path && textures[E4].path &&
 		textures[F].path && textures[C].path)
 		return (1);
 	return (0);
@@ -28,14 +28,14 @@ int	set_texture(char **tokens, t_game *g)
 	if (!tokens || !tokens[0] || !tokens[1] || tokens[2])
 		return (free_all(g, tokens, "bad format in texture"));
 	tex_id = -1;
-	if (strncmp(tokens[0], "NO", 2) == 0 && !g->map.textures[NO].path)
-		tex_id = NO;
-	else if (strncmp(tokens[0], "SO", 2) == 0 && !g->map.textures[SO].path)
-		tex_id = SO;
-	else if (strncmp(tokens[0], "WE", 2) == 0 && !g->map.textures[WE].path)
-		tex_id = WE;
-	else if (strncmp(tokens[0], "EA", 2) == 0 && !g->map.textures[EA].path)
-		tex_id = EA;
+	if (strncmp(tokens[0], "E1", 2) == 0 && !g->map.textures[E1].path)
+		tex_id = E1;
+	else if (strncmp(tokens[0], "E2", 2) == 0 && !g->map.textures[E2].path)
+		tex_id = E2;
+	else if (strncmp(tokens[0], "E3", 2) == 0 && !g->map.textures[E3].path)
+		tex_id = E3;
+	else if (strncmp(tokens[0], "E4", 2) == 0 && !g->map.textures[E4].path)
+		tex_id = E4;
 	else if (strncmp(tokens[0], "F", 1) == 0 && !g->map.textures[F].path)
 		tex_id = F;
 	else if (strncmp(tokens[0], "C", 1) == 0 && !g->map.textures[C].path)	
@@ -56,7 +56,8 @@ int	is_map_line(char *line)
 	not_all_spaces = 0;
 	while (*line)
 	{
-		if (*line != ' ' && *line != '0' && *line != '1' &&
+		if (*line != ' ' && *line != '0' && *line != '1' && 
+			*line != '2' && *line != '3' && *line != '4' && 
 			*line != 'N' && *line != 'S' && *line != 'E' && *line != 'W')
 			return (0);
 		if (*line != ' ')

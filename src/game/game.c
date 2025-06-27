@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 12:43:48 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/26 18:07:31 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/27 15:50:23 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int	launch_game(t_game *g)
 	mlx_get_monitor_size(0, &g->data.screen_width, &g->data.screen_height);
 	mlx_image_to_window(g->data.mlx, g->data.img, 0, 0);
 	ft_set_cursor(g);
-	cast_all_rays(g);
+	if (cast_all_rays(g) < 0)
+		return (-1);
 	mlx_key_hook(g->data.mlx, on_keypress, g);
 	mlx_mouse_hook(g->data.mlx, on_mouse_button, g);
 	mlx_close_hook(g->data.mlx, on_destroy, g);

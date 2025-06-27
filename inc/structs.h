@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:56:52 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/26 17:47:39 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/27 14:51:41 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ typedef struct	s_coord
 
 typedef enum e_texture
 {
-    NO,
-    SO,
-    WE,
-    EA,
+    E1,
+    E2,
+    E3,
+    E4,
     F,
     C,
     TEXTURE_COUNT

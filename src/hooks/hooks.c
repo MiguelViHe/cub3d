@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:04:11 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/26 18:11:37 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/27 15:53:18 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,7 @@ void on_game_loop(void *param)
 		update_mouse_rotation(g, rotSpeedm);
 	}
 	update_player_movement(g, moveSpeed, rotSpeedk);
-	cast_all_rays(g);
+	if (cast_all_rays(g) < 0)
+		exit(-1);
+	
 }

@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:33:56 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/25 16:55:58 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/27 15:19:09 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	draw_floor(mlx_image_t* img, int x, t_screenline *draw)
 	}
 }
 
-void	set_color_texture(t_screenline *d, t_tex_inf *ti)
+void	set_color_texture(t_screenline *d, int side, t_tex_inf *ti)
 {
 	uint8_t r;
 	uint8_t g;
@@ -56,27 +56,29 @@ void	set_color_texture(t_screenline *d, t_tex_inf *ti)
 	b = ti->mlx_tx->pixels[ti->pixel_index + 2];
 	a = ti->mlx_tx->pixels[ti->pixel_index + 3];
 	d->color_wall = (r << 24) | (g << 16) | (b << 8) | a;
+	if (side == 0)
+		d->color_wall = darken_color(d->color_wall);
 }
 
-void	draw_wall(mlx_image_t* img, int x, t_screenline *d, t_tex_inf *ti)
+void	draw_wall(mlx_image_t* img, int x, t_ray *r, t_tex_inf *ti)
 {
 	int	index;
 	
-	index = d->start;
-	while (index <= d->end)
+	index = r->draw.start;
+	while (index <= r->draw.end)
 	{
 		if (TEXTURES)
-			set_color_texture(d, ti);
-		mlx_put_pixel(img, x, index, d->color_wall);
+			set_color_texture(&r->draw, r->side, ti);
+		mlx_put_pixel(img, x, index, r->draw.color_wall);
 		index++;
 	}
 }
 
-void	draw_vertical_line(t_game *g, int x, t_screenline *d, t_tex_inf *tinf)
+void	draw_vertical_line(t_game *g, int x, t_ray *ray, t_tex_inf *tinf)
 {
-	draw_ceiling(g->data.img, x, d);
-	draw_wall(g->data.img, x, d, tinf);
-	draw_floor(g->data.img, x, d);
+	draw_ceiling(g->data.img, x, &ray->draw);
+	draw_wall(g->data.img, x, ray, tinf);
+	draw_floor(g->data.img, x, &ray->draw);
 }
 
 void	calc_draw_line(t_game *g, t_ray *ray)

@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/26 18:08:14 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/27 15:49:30 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,6 @@ void		on_game_loop(void *param);
 //map/check_map.c
 int			check_map(t_game *g);
 
-//map/generate_map.c
-void		generate_map(char *map_name, t_map *map);
-
 //map/map_errors.c
 void		wrong_map_exit(char *buffer, char *message, int need_free);
 void		wrong_generate_map_exit(char *message, int fd);
@@ -107,16 +104,17 @@ void		setup_dda(t_ray *ray, t_game *game);
 void		raycast_dda(t_ray *ray, t_game *g);
 
 //ray/raycast.c
-void		cast_all_rays(t_game *g);
+int			cast_all_rays(t_game *g);
 
 //textures/textures.c
 int			ft_load_texture(t_game *g, t_textures *texture);
-int			get_texture_direction(int side, t_vector ray_dir);
+// int			get_texture_direction(int side, t_vector ray_dir);
+int			get_texture_elem_bonus(char e);
 
 //textures/calculate_texture.c
 void		calc_wallx_and_texx(t_game *g, t_ray *ray);
 void		calc_step_and_pos(double *step, double *pos, t_ray *r, int lineheight);
-void		calc_tex_inf(t_game *g, t_ray *ray);
+int			calc_tex_inf(t_game *g, t_ray *ray);
 
 //checkers.c
 int			dir_ok(char *dir);
@@ -127,7 +125,7 @@ uint32_t	set_color_line(t_game *g, t_coord map, int wall_side);
 uint32_t	darken_color(uint32_t color);
 
 //draw.c
-void		draw_vertical_line(t_game *g, int x, t_screenline *d, t_tex_inf *ti);
+void		draw_vertical_line(t_game *g, int x, t_ray *ray, t_tex_inf *ti);
 void		calc_draw_line(t_game *g, t_ray *ray);
 
 //files.c
