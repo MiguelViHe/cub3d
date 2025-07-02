@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 14:46:28 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/27 15:47:09 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/01 20:12:04 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	calc_wallx_and_texx(t_game *g, t_ray *ray)
 			|| (ray->side == 1 && ray->dir.y < 0))
 		ray->tex_info.tx.x = flip_texx(ray);
 }
+
 void	calc_step_and_pos(double *step, double *pos, t_ray *r, int lineheight)
 {
 	*step = (double)r->tex_info.mlx_tx->height / lineheight;
@@ -38,13 +39,13 @@ void	calc_step_and_pos(double *step, double *pos, t_ray *r, int lineheight)
 
 int	calc_tex_inf(t_game *g, t_ray *ray)
 {
-	int		t_elem;
+	char	map_elem;
 	
-	t_elem = get_texture_elem_bonus(g->map.matrix[ray->map.y][ray->map.x]);
-	if (t_elem < 0 || t_elem >= TEXTURE_COUNT)
-		return (free_all(g, NULL, "Invalid texture element"));
-	ray->tex_info.tx_dir = t_elem;
-	ray->tex_info.mlx_tx = g->map.textures[t_elem].texture;
+	map_elem = g->map.matrix[ray->map.y][ray->map.x];
+	if (!g->map.textures[(int)map_elem].texture)
+		return (free_all(g, NULL, "Texture not loaded for map element"));
+	ray->tex_info.tx_dir = (int)map_elem;
+	ray->tex_info.mlx_tx = g->map.textures[(int)map_elem].texture;
 	calc_wallx_and_texx(g, ray);
 	calc_step_and_pos(&ray->tex_info.tx_step, &ray->tex_info.tx_pos, 
 		ray, ray->draw.lineheight);

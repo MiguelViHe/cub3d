@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:31:46 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/20 11:50:58 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/30 15:08:56 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_textures(t_textures *textures)
 	int	i;
 
 	i = 0;
-	while (i < TEXTURE_COUNT)
+	while (i < MAX_TEXTURES)
 	{
 		if (textures[i].texture)
 		{

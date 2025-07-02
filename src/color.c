@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:50:11 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/20 13:59:00 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/30 12:36:36 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	set_surface_color(t_game *g, int s)
 
 	path = g->map.textures[s].path;
 	color = &g->map.textures[s].color;
-	if (s == F || s == C)
+	if (s == 'F' || s == 'C')
 		return (color_to_hex(g, path, color));
 	return (free_all(g, NULL, "Invalid surface type"));
 }

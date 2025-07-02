@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:33:56 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/27 15:19:09 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/30 15:12:23 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,6 @@ void	calc_draw_line(t_game *g, t_ray *ray)
 	ray->draw.end = ft_clamp(screenH / 2 + ray->draw.lineheight / 2, 0, screenH - 1);
 	if (!TEXTURES)
 		ray->draw.color_wall = set_color_line(g, ray->map, ray->side);
-	ray->draw.color_floor = &g->map.textures[F].color; //Punteros a los colores ya calculados
-	ray->draw.color_ceiling = &g->map.textures[C].color; //Punteros a los colores ya calculados
+	ray->draw.color_floor = &g->map.textures['F'].color; //Punteros a los colores ya calculados
+	ray->draw.color_ceiling = &g->map.textures['C'].color; //Punteros a los colores ya calculados
 }

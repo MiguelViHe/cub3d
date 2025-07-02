@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:56:52 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/27 14:51:41 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:49:49 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,20 @@ typedef struct	s_coord
 	int			y;
 }				t_coord;
 
-typedef enum e_texture
-{
-    E1,
-    E2,
-    E3,
-    E4,
-    F,
-    C,
-    TEXTURE_COUNT
-}	t_texture;
+// typedef enum e_texture
+// {
+//     E1,
+//     E2,
+//     E3,
+//     E4,
+//     F,
+//     C,
+//     TEXTURE_COUNT
+// }	t_texture;
 
 typedef struct	s_textures
 {
+	char			symbol;
 	char			*path;
 	mlx_texture_t	*texture;
 	uint32_t		color;
@@ -61,7 +62,7 @@ typedef struct	s_map
 	int			player_count;
 	t_list		*map_list;
 	char		**matrix;
-	t_textures	textures[TEXTURE_COUNT];
+	t_textures	textures[MAX_TEXTURES];
 
 }				t_map;
 

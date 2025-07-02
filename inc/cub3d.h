@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/27 15:49:30 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/01 19:49:45 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 
 # define	TITLE "Cub3D"
 # define	TILE_SIZE 2048 //No usada. leer draw.c
+
+#define MAX_TEXTURES 128 // 1 por cada caracter ASCII válido
 
 //configuration 
 # define	TEXTURES 		true
@@ -61,12 +63,20 @@ void		on_mouse_button(mouse_key_t btn, action_t act, modifier_key_t mod, void *p
 void		on_game_loop(void *param);
 
 //map/check_map.c
+int			is_wall_elem(t_game *g, char c);
 int			check_map(t_game *g);
+
+//map/generate_map_array.c
+int	generate_map_array(t_game *g);
 
 //map/map_errors.c
 void		wrong_map_exit(char *buffer, char *message, int need_free);
 void		wrong_generate_map_exit(char *message, int fd);
-void		check_arg_cub(char *name);
+
+//parse/parse_checkers.c
+bool	is_reserved_symbol(char c);
+int		is_map_line(t_textures *tx, char *line);
+int		is_player_inline(char *line);
 
 //parse/parse_file.c
 int			parse_file(char *map_name, t_game *game);
@@ -118,6 +128,7 @@ int			calc_tex_inf(t_game *g, t_ray *ray);
 
 //checkers.c
 int			dir_ok(char *dir);
+void		check_arg_cub(char *name);
 
 //color.c
 int			set_surface_color(t_game *g, int s);
