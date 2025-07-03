@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:06:54 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/03 12:50:25 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/03 16:18:31 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,11 @@ void	setup_dda(t_ray *ray, t_game *game)
 int	is_hit_elem(t_game *g, char **matrix, int y, int x)
 {
 	char	c;
-	t_doors	*d_inf;
 
 	c = matrix[y][x];
-	d_inf = &g->map.doors_info;
 	if (!g->map.textures[(int)c].texture)
 		return (0);
-	if (is_door_symbol(c) && is_door_open(d_inf, x, y))
+	if (is_door_symbol(c) && is_door_open(g, x, y))
 		return (0);
 	return (1);
 }

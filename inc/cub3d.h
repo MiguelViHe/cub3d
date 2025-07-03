@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/03 13:13:38 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/03 16:54:19 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # define	TILE_SIZE 2048 //No usada. leer draw.c
 
 # define 	MAX_TEXTURES 128 // 1 por cada caracter ASCII válido
-# define 	DOOR_SYMBOL 'D' // Símbolo que representa una puerta en el mapa
 
 //configuration 
 # define	TEXTURES 		true
@@ -37,6 +36,10 @@
 # define	MOUSE_ROTATION_SPEED 0.05
 # define	FOV_DEGREES 66.0
 # define	MARGIN_WALL 0.2 // Margin representing the body space of the player, used to avoid collisions with walls
+
+// Door configuration
+# define	DOOR_SYMBOL 'D' // Symbol representing a door in the map
+# define	DOOR_ANIMATION_SPEED 0.5 // Speed of door opening/closing animation in units per second
 
 // Raycasting configuration
 # define		screenW 1920
@@ -55,9 +58,13 @@
 //doors/actions.c
 void		toggle_door(t_game *g, int x, int y);
 
+//doors/animation.c
+void		update_doors_animation(t_game *g, double delta_time);
+
 //doors/check_door.c
 int			is_door_symbol(char c);
-bool		is_door_open(t_doors *d, int x, int y);
+bool		is_door_open(t_game *g, int x, int y);
+t_door		*find_door(t_game *g, int x, int y);
 
 //game/game.c
 int			launch_game(t_game *game);

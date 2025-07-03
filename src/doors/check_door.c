@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:25:52 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/03 13:13:58 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/03 17:05:10 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,28 @@ int	is_door_symbol(char c)
 	return (c == DOOR_SYMBOL);
 }
 
-bool	is_door_open(t_doors *d, int x, int y)
+t_door	*find_door(t_game *g, int x, int y)
 {
 	size_t	i;
-
+	t_door	*door;
+	
 	i = 0;
-	while (i < d->doors_count)
+	while (i < g->map.doors_info.doors_count)
 	{
-		if (d->doors_array[i].x == x && d->doors_array[i].y == y)
-			return (d->doors_array[i].open);
+		door = &g->map.doors_info.doors_array[i];
+		if (door->x == x && door->y == y)
+			return door;
 		i++;
 	}
-	return (false); // Si no se encuentra la puerta, consideramos que está cerrada
+	return NULL;
+}
+
+bool	is_door_open(t_game *g, int x, int y)
+{
+	t_door	*door;
+
+	door = find_door(g, x, y);
+	if (!door)
+		return false; // Si no se encuentra la puerta, asumo que está cerrada.
+	return (door->anim_state >= 1.0);
 }

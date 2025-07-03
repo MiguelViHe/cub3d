@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 12:39:44 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/03 13:10:18 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/03 15:31:52 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	is_wall(t_game *g, double x, double y)
 	if (ix < 0 || ix >= (int)g->map.width)
 		return (1); // Fuera del rango horizontal
 	c = g->map.matrix[iy][ix];
-	if (is_door_symbol(c) && is_door_open(&g->map.doors_info, ix, iy))
+	if (is_door_symbol(c) && is_door_open(g, ix, iy))
 		return (0); // Si es una puerta abierta, no es pared
 	return (c != '0');
 }
