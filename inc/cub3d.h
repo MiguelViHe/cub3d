@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/01 19:49:45 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/03 13:13:38 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 # define	TITLE "Cub3D"
 # define	TILE_SIZE 2048 //No usada. leer draw.c
 
-#define MAX_TEXTURES 128 // 1 por cada caracter ASCII válido
+# define 	MAX_TEXTURES 128 // 1 por cada caracter ASCII válido
+# define 	DOOR_SYMBOL 'D' // Símbolo que representa una puerta en el mapa
 
 //configuration 
 # define	TEXTURES 		true
@@ -38,8 +39,11 @@
 # define	MARGIN_WALL 0.2 // Margin representing the body space of the player, used to avoid collisions with walls
 
 // Raycasting configuration
-#define		screenW 1920
-#define		screenH 1080
+# define		screenW 1920
+# define		screenH 1080
+
+// Macros
+# define TOGGLE(x) ((x) = !(x))
 
 # include <stdio.h>
 # include <stdlib.h> //atoi, atof
@@ -48,6 +52,13 @@
 # include "structs.h"
 # include "libft.h"
 
+//doors/actions.c
+void		toggle_door(t_game *g, int x, int y);
+
+//doors/check_door.c
+int			is_door_symbol(char c);
+bool		is_door_open(t_doors *d, int x, int y);
+
 //game/game.c
 int			launch_game(t_game *game);
 
@@ -55,6 +66,7 @@ int			launch_game(t_game *game);
 void		update_mouse_rotation(t_game *g, double rotSpeed);
 void		update_player_movement(t_game *g, double moveSpeed, double rotSpeed);
 void		process_scape_key(t_game *g);
+void		process_action_key(t_game *g);
 
 //hooks/hooks.c
 void		on_destroy(void *param);
@@ -63,20 +75,19 @@ void		on_mouse_button(mouse_key_t btn, action_t act, modifier_key_t mod, void *p
 void		on_game_loop(void *param);
 
 //map/check_map.c
-int			is_wall_elem(t_game *g, char c);
+int			is_border_elem(t_game *g, char c);
 int			check_map(t_game *g);
 
 //map/generate_map_array.c
-int	generate_map_array(t_game *g);
-
-//map/map_errors.c
-void		wrong_map_exit(char *buffer, char *message, int need_free);
-void		wrong_generate_map_exit(char *message, int fd);
+int			generate_map_array(t_game *g);
 
 //parse/parse_checkers.c
-bool	is_reserved_symbol(char c);
-int		is_map_line(t_textures *tx, char *line);
-int		is_player_inline(char *line);
+bool		is_reserved_symbol(char c);
+int			is_map_line(t_textures *tx, char *line);
+int			is_player_inline(char *line);
+
+//parse/parse_doors.c
+int			init_doors(t_map *map, t_doors *d_inf);
 
 //parse/parse_file.c
 int			parse_file(char *map_name, t_game *game);
@@ -118,7 +129,6 @@ int			cast_all_rays(t_game *g);
 
 //textures/textures.c
 int			ft_load_texture(t_game *g, t_textures *texture);
-// int			get_texture_direction(int side, t_vector ray_dir);
 int			get_texture_elem_bonus(char e);
 
 //textures/calculate_texture.c
@@ -153,6 +163,7 @@ int			free_all(t_game *game, char **tokens, char *message);
 //printer.c
 void		print_game_info(t_game *game);
 void		print_game_map(char **map);
+void		print_door_info(t_doors d_inf);
 
 //transform.c
 double		deg_to_rad(double degrees);

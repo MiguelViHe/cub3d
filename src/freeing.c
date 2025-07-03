@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:31:46 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/30 15:08:56 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/03 10:45:21 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	free_all(t_game *game, char **tokens, char *message)
 	free_map_array(&game->map);
 	free_textures(game->map.textures);
 	ft_lstclear(&game->map.map_list, free);
+	if (game->map.doors_info.doors_array)
+		free(game->map.doors_info.doors_array);
 	if (message)
 		ft_fdprintf(2, "Error\n%s\n", message);
 	return (-1);

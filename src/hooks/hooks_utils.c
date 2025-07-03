@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 17:51:17 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/26 18:23:00 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/03 11:47:11 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,13 @@ void update_player_movement(t_game *g, double moveSpeed, double rotSpeed)
 		rotate_player(g, -rotSpeed);
 	if (g->input.rotate_right)
 		rotate_player(g, rotSpeed);
+}
+
+void process_action_key(t_game *g)
+{
+	int target_x = (int)(g->player.pos.x + g->player.dir.x);
+	int target_y = (int)(g->player.pos.y + g->player.dir.y);
+
+	if (g->map.matrix[target_y][target_x] == 'D')
+		toggle_door(g, target_x, target_y);
 }

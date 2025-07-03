@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:56:52 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/27 16:49:49 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/03 12:54:03 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,20 @@ typedef struct	s_player
 	t_vector	plane;
 }				t_player;
 
+typedef struct	s_door
+{
+	int			x;
+	int			y;
+	bool		open; // false = cerrada, true = abierta
+	double		anim_state;
+}				t_door;
+
+typedef struct	s_doors
+{
+	t_door		*doors_array; // Lista de puertas
+	size_t		doors_count; // Número de puertas en el mapa
+}				t_doors;
+
 typedef struct	s_map
 {
 	size_t		height;
@@ -62,6 +76,7 @@ typedef struct	s_map
 	int			player_count;
 	t_list		*map_list;
 	char		**matrix;
+	t_doors		doors_info; // Estructura para manejar puertas
 	t_textures	textures[MAX_TEXTURES];
 
 }				t_map;

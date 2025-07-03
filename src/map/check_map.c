@@ -6,21 +6,20 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 13:02:18 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/01 16:40:40 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/03 12:28:48 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	is_wall_elem(t_game *g, char c)
+int	is_border_elem(t_game *g, char c)
 {
-	if (is_reserved_symbol(c))
+	if (is_reserved_symbol(c) || is_door_symbol(c))
 		return (0);
 	if (g->map.textures[(int)c].texture)
 		return (1);
 	return (0);
 }
-
 
 // This function checks if every element in the map has a texture.
 int	validate_map_textures(t_game *g, size_t height, size_t width)
@@ -85,13 +84,13 @@ int	check_map_border(t_game *g, size_t hei, size_t wid)
 		x = 0;
 		while (x < wid)
 		{
-			if (!is_wall_elem(g, map[0][x]) && map[0][x] != ' ')
+			if (!is_border_elem(g, map[0][x]) && map[0][x] != ' ')
 				return (free_all(g, NULL, "Map must be surrounded by walls"));
-			if (!is_wall_elem(g, map[hei - 1][x]) && map[hei - 1][x] != ' ')
+			if (!is_border_elem(g, map[hei - 1][x]) && map[hei - 1][x] != ' ')
 				return (free_all(g, NULL, "Map must be surrounded by walls"));
-			if (!is_wall_elem(g, map[y][0]) && map[y][0] != ' ')
+			if (!is_border_elem(g, map[y][0]) && map[y][0] != ' ')
 				return (free_all(g, NULL, "Map must be surrounded by walls"));
-			if (!is_wall_elem(g, map[y][wid - 1]) && map[y][wid - 1] != ' ')
+			if (!is_border_elem(g, map[y][wid - 1]) && map[y][wid - 1] != ' ')
 				return (free_all(g, NULL, "Map must be surrounded by walls"));
 			x++;
 		}
