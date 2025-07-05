@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/03 16:54:19 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/05 17:57:12 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define M_PI 3.14159265358979323846
 #endif
 
-#ifndef CUBE3D_H
-# define CUBE3D_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
 # define	TITLE "Cub3D"
 # define	TILE_SIZE 2048 //No usada. leer draw.c
@@ -42,8 +42,8 @@
 # define	DOOR_ANIMATION_SPEED 0.5 // Speed of door opening/closing animation in units per second
 
 // Raycasting configuration
-# define		screenW 1920
-# define		screenH 1080
+# define		screenW 1280
+# define		screenH 720
 
 // Macros
 # define TOGGLE(x) ((x) = !(x))
@@ -128,6 +128,7 @@ void		calc_step_dir(t_ray *ray);
 void		calc_side_dist(t_ray *ray, t_vector *player_pos);
 
 //ray/dda.c
+int			is_hit_elem(t_game *g, int y, int x);
 void		setup_dda(t_ray *ray, t_game *game);
 void		raycast_dda(t_ray *ray, t_game *g);
 
@@ -136,9 +137,9 @@ int			cast_all_rays(t_game *g);
 
 //textures/textures.c
 int			ft_load_texture(t_game *g, t_textures *texture);
-int			get_texture_elem_bonus(char e);
 
 //textures/calculate_texture.c
+double		calc_wallx(t_game *g, t_ray *ray);
 void		calc_wallx_and_texx(t_game *g, t_ray *ray);
 void		calc_step_and_pos(double *step, double *pos, t_ray *r, int lineheight);
 int			calc_tex_inf(t_game *g, t_ray *ray);
@@ -153,7 +154,7 @@ uint32_t	set_color_line(t_game *g, t_coord map, int wall_side);
 uint32_t	darken_color(uint32_t color);
 
 //draw.c
-void		draw_vertical_line(t_game *g, int x, t_ray *ray, t_tex_inf *ti);
+void		draw_vertical_line(t_game *g, int x, t_ray *ray);
 void		calc_draw_line(t_game *g, t_ray *ray);
 
 //files.c

@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 14:45:42 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/27 15:54:32 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/04 13:14:22 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,7 @@ int	cast_all_rays(t_game *g)
 		if (TEXTURES)
 			if (calc_tex_inf(g, &ray) < 0)
 				return (-1);
-		draw_vertical_line(g, x, &ray, &ray.tex_info);
-		// printf("cameraX = %.5f, Columna %d: rayDirX = %.5f, rayDirY = %.5f ", ray.cameraX, x, ray.dir.x, ray.dir.y);
-		// printf("||||| deltaX = %.5f , deltaY = %.5f ", ray.delta_dist.x, ray.delta_dist.y);
-		// printf("||||| stepX = %d , stepY = %d ", ray.step.x, ray.step.y);
-		// printf("||||| sideX = %.5f , sideY = %.5f", ray.side_dist.x, ray.side_dist.y);
-		// printf("----> choco en [%d,%d] (lado %d)", ray.map.x, ray.map.y, ray.side);
-		// printf("muro [ini,fin]=[%d,%d] (lado %d)\n", ray.draw.start, ray.draw.end, ray.side);
+		draw_vertical_line(g, x, &ray);
 		x++;
 	}
 	return (0);

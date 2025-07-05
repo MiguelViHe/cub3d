@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 14:46:28 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/03 17:29:47 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/05 17:54:15 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,31 @@
 int		flip_texx(t_ray *ray)
 {
 	return (ray->tex_info.mlx_tx->width - ray->tex_info.tx.x - 1);
+}
+
+double	calc_wallx(t_game *g, t_ray *ray)
+{
+	double	wallx;
+	double	map_diff; // distancia del mapa desde el jugador a la pared en X
+	double	step_correction; //ajuste para corregir la dirección del paso (+1 o -1)
+	double	ratio; // escala la distancia en X y obtener la posición precisa en Y. (y viceversa cuando side 1).
+
+	if (ray->side == 0)
+	{
+		map_diff = ray->map.x - g->player.pos.x;
+		step_correction = (1 - ray->step.x) / 2.0;
+		ratio = ray->dir.y / ray->dir.x;
+		wallx = g->player.pos.y + (map_diff + step_correction) * ratio;
+	}
+	else
+	{
+		map_diff = ray->map.y - g->player.pos.y;
+		step_correction = (1 - ray->step.y) / 2.0;
+		ratio = ray->dir.x / ray->dir.y;
+		wallx = g->player.pos.x + (map_diff + step_correction) * ratio;
+	}
+
+	return wallx - floor(wallx);
 }
 
 void	calc_wallx_and_texx(t_game *g, t_ray *ray)
@@ -34,8 +59,10 @@ void	calc_wallx_and_texx(t_game *g, t_ray *ray)
 		door = find_door(g, ray->map.x, ray->map.y);
 		if (door)
 		{
-			ray->tex_info.tx.x += door->anim_state * ray->tex_info.mlx_tx->width;
-			if (ray->tex_info.tx.x >= (int)ray->tex_info.mlx_tx->width)
+			ray->tex_info.tx.x -= door->anim_state * ray->tex_info.mlx_tx->width;
+			if (ray->tex_info.tx.x < 0)
+				ray->tex_info.tx.x = 0;
+			else if (ray->tex_info.tx.x >= (int)ray->tex_info.mlx_tx->width)
 				ray->tex_info.tx.x = (int)ray->tex_info.mlx_tx->width - 1;
 		}
 	}

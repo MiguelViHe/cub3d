@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:33:56 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/06/30 15:12:23 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/04 16:07:12 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	set_color_texture(t_screenline *d, int side, t_tex_inf *ti)
 		d->color_wall = darken_color(d->color_wall);
 }
 
-void	draw_wall(mlx_image_t* img, int x, t_ray *r, t_tex_inf *ti)
+void	draw_wall(mlx_image_t* img, int x, t_ray *r)
 {
 	int	index;
 	
@@ -68,16 +68,16 @@ void	draw_wall(mlx_image_t* img, int x, t_ray *r, t_tex_inf *ti)
 	while (index <= r->draw.end)
 	{
 		if (TEXTURES)
-			set_color_texture(&r->draw, r->side, ti);
+			set_color_texture(&r->draw, r->side, &r->tex_info);
 		mlx_put_pixel(img, x, index, r->draw.color_wall);
 		index++;
 	}
 }
 
-void	draw_vertical_line(t_game *g, int x, t_ray *ray, t_tex_inf *tinf)
+void	draw_vertical_line(t_game *g, int x, t_ray *ray)
 {
 	draw_ceiling(g->data.img, x, &ray->draw);
-	draw_wall(g->data.img, x, ray, tinf);
+	draw_wall(g->data.img, x, ray);
 	draw_floor(g->data.img, x, &ray->draw);
 }
 

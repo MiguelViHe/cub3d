@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 11:49:11 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/03 15:29:25 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/05 17:19:56 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,13 @@
 void toggle_door(t_game *g, int x, int y)
 {
 	t_door	*door;
-
-	door = find_door(g, x, y);
-	if (door)
-		TOGGLE(door->open);
+	char	c;
+	
+	c = g->map.matrix[y][x];
+	if (is_door_symbol(c))
+	{
+		door = find_door(g, x, y);
+		if (door)
+			TOGGLE(door->open);
+	}
 }

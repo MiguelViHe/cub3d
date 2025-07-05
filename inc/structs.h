@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:56:52 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/03 12:54:03 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/03 17:46:17 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ typedef struct	s_ray
 	t_coord			step;			// dirección de incremento en X e Y
 	int				side;			// 0 si el muro es vertical, 1 si horizontal
 	int				hit;			// 0 si aun no ha chocado con un muro, 1 si ha chocado.
+	int				hit_door;		// 0 si no ha chocado con una puerta parcialmente abierta, 1 si ha chocado.
 	double			perpWallDist;	// distancia corregida hasta la pared perpendicular a plane.
 	t_screenline	draw;			// inicio y final de pintado de una linea de pantalla respecto a la distancia del muro.
 	t_tex_inf		tex_info;		// Información de textura para pintar el muro.

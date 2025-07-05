@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:25:52 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/03 17:05:10 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/05 17:34:15 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_door	*find_door(t_game *g, int x, int y)
 {
 	size_t	i;
 	t_door	*door;
-	
+
 	i = 0;
 	while (i < g->map.doors_info.doors_count)
 	{
