@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:06:54 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/05 18:07:39 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/05 19:00:01 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,10 @@ int	is_hit_elem(t_game *g, int y, int x)
 void	raycast_dda(t_ray *ray, t_game *g)
 {
 	double	temp_wallx;
+	t_door	*door;
 
 	ray->hit = 0;
+	ray->hit_door = 0;
 	while (!ray->hit)
 	{
 		// Avanza al siguiente bloque
@@ -122,14 +124,12 @@ void	raycast_dda(t_ray *ray, t_game *g)
 			ray->map.y += ray->step.y;
 			ray->side = 1;
 		}
-
 		if (!is_hit_elem(g, ray->map.y, ray->map.x))
 			continue;
-
-		char c = g->map.matrix[ray->map.y][ray->map.x];
-		if (is_door_symbol(c))
+		door = find_door(g, ray->map.x, ray->map.y);
+		if (door)
 		{
-			t_door *door = find_door(g, ray->map.x, ray->map.y);
+			// Calcula la posición del impacto en la pared (wallX)
 			temp_wallx = calc_wallx(g, ray);
 			// El signo aquí es < para comprobar si el rayo impacta con la parte cerrada
 			if (temp_wallx < door->anim_state)

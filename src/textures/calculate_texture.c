@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 14:46:28 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/05 18:18:24 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/05 18:32:59 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,18 @@ double	calc_wallx(t_game *g, t_ray *ray)
 
 void	calc_wallx_and_texx(t_game *g, t_ray *ray)
 {
-	char	c;
 	t_door	*door;
 
 	ray->tex_info.wallX = calc_wallx(g, ray);
 	ray->tex_info.tx.x = (int)(ray->tex_info.wallX * ray->tex_info.mlx_tx->width);
-	c = g->map.matrix[ray->map.y][ray->map.x];
-	if (is_door_symbol(c))
+	door = find_door(g, ray->map.x, ray->map.y);
+	if (door)
 	{
-		door = find_door(g, ray->map.x, ray->map.y);
-		if (door)
-		{
-			ray->tex_info.tx.x -= door->anim_state * ray->tex_info.mlx_tx->width;
-			if (ray->tex_info.tx.x < 0)
-				ray->tex_info.tx.x = 0;
-			else if (ray->tex_info.tx.x >= (int)ray->tex_info.mlx_tx->width)
-				ray->tex_info.tx.x = (int)ray->tex_info.mlx_tx->width - 1;
-		}
+		ray->tex_info.tx.x -= door->anim_state * ray->tex_info.mlx_tx->width;
+		if (ray->tex_info.tx.x < 0)
+			ray->tex_info.tx.x = 0;
+		else if (ray->tex_info.tx.x >= (int)ray->tex_info.mlx_tx->width)
+			ray->tex_info.tx.x = (int)ray->tex_info.mlx_tx->width - 1;
 	}
 	if ((ray->side == 0 && ray->dir.x > 0) 
 			|| (ray->side == 1 && ray->dir.y < 0))
@@ -86,6 +81,7 @@ int	calc_tex_inf(t_game *g, t_ray *ray)
 	char	map_elem;
 	
 	map_elem = g->map.matrix[ray->map.y][ray->map.x];
+	printf("Calculating texture for map element: %c at (%d, %d)\n", map_elem, ray->map.x, ray->map.y);
 	if (!g->map.textures[(int)map_elem].texture)
 		return (free_all(g, NULL, "Texture not loaded for map element"));
 	ray->tex_info.tx_dir = (int)map_elem;
