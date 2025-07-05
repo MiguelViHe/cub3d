@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 14:46:28 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/05 17:54:15 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/05 18:18:24 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ int		flip_texx(t_ray *ray)
 
 double	calc_wallx(t_game *g, t_ray *ray)
 {
+	/*Esta formula tambien vale pero con ella se necesita tener calculado perpWallDist por adelantado:
+		if (ray->side == 0)
+			ray->tex_info.wallX = g->player.pos.y + ray->perpWallDist * ray->dir.y;
+		else
+			ray->tex_info.wallX = g->player.pos.x + ray->perpWallDist * ray->dir.x;
+		ray->tex_info.wallX -= floor(ray->tex_info.wallX);
+	*/
+
 	double	wallx;
 	double	map_diff; // distancia del mapa desde el jugador a la pared en X
 	double	step_correction; //ajuste para corregir la dirección del paso (+1 o -1)
@@ -47,11 +55,7 @@ void	calc_wallx_and_texx(t_game *g, t_ray *ray)
 	char	c;
 	t_door	*door;
 
-	if (ray->side == 0)
-		ray->tex_info.wallX = g->player.pos.y + ray->perpWallDist * ray->dir.y;
-	else
-		ray->tex_info.wallX = g->player.pos.x + ray->perpWallDist * ray->dir.x;
-	ray->tex_info.wallX -= floor(ray->tex_info.wallX);
+	ray->tex_info.wallX = calc_wallx(g, ray);
 	ray->tex_info.tx.x = (int)(ray->tex_info.wallX * ray->tex_info.mlx_tx->width);
 	c = g->map.matrix[ray->map.y][ray->map.x];
 	if (is_door_symbol(c))

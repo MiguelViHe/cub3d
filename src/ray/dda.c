@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:06:54 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/05 17:36:19 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/05 18:07:39 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ int	is_hit_elem(t_game *g, int y, int x)
 
 void	raycast_dda(t_ray *ray, t_game *g)
 {
+	double	temp_wallx;
+
 	ray->hit = 0;
 	while (!ray->hit)
 	{
@@ -128,26 +130,15 @@ void	raycast_dda(t_ray *ray, t_game *g)
 		if (is_door_symbol(c))
 		{
 			t_door *door = find_door(g, ray->map.x, ray->map.y);
-
-			// Calcula wallX aproximado directamente aquí
-			double hit_pos;
-			if (ray->side == 0)
-				hit_pos = g->player.pos.y + (ray->map.x - g->player.pos.x + (1 - ray->step.x) / 2) * ray->dir.y / ray->dir.x;
-			else
-				hit_pos = g->player.pos.x + (ray->map.y - g->player.pos.y + (1 - ray->step.y) / 2) * ray->dir.x / ray->dir.y;
-
-			hit_pos -= floor(hit_pos); // solo la parte fraccionaria
-
+			temp_wallx = calc_wallx(g, ray);
 			// El signo aquí es < para comprobar si el rayo impacta con la parte cerrada
-			if (hit_pos < door->anim_state)
+			if (temp_wallx < door->anim_state)
 				continue;
-
 			ray->hit_door = 1;
 		}
 		// Si llegamos aquí, hemos chocado contra algo realmente sólido
 		ray->hit = 1;
 	}
-
 	// Calcula la distancia perpendicular
 	if (ray->side == 0)
 		ray->perpWallDist = ray->side_dist.x - ray->delta_dist.x;
