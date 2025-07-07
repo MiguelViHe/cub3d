@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   actions.c                                          :+:      :+:    :+:   */
+/*   ft_get_time.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/03 11:49:11 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/07 12:38:11 by mvidal-h         ###   ########.fr       */
+/*   Created: 2025/07/07 12:20:03 by mvidal-h          #+#    #+#             */
+/*   Updated: 2025/07/07 12:21:27 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include <sys/time.h>
+#include <stddef.h>
 
-void toggle_door(t_door *door)
+double	ft_get_time(void)
 {
-	if (door)
-		TOGGLE(door->open);
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec + tv.tv_usec / 1e6);
 }

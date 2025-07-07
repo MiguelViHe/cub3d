@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/05 17:57:12 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/07 14:52:00 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@
 # include "libft.h"
 
 //doors/actions.c
-void		toggle_door(t_game *g, int x, int y);
+void		toggle_door(t_door *door);
 
 //doors/animation.c
 void		update_doors_animation(t_game *g, double delta_time);
@@ -72,6 +72,7 @@ int			launch_game(t_game *game);
 //hooks/hooks_utils.c
 void		update_mouse_rotation(t_game *g, double rotSpeed);
 void		update_player_movement(t_game *g, double moveSpeed, double rotSpeed);
+void		update_doors_touch_timer(t_game *g);
 void		process_scape_key(t_game *g);
 void		process_action_key(t_game *g);
 
@@ -128,7 +129,6 @@ void		calc_step_dir(t_ray *ray);
 void		calc_side_dist(t_ray *ray, t_vector *player_pos);
 
 //ray/dda.c
-int			is_hit_elem(t_game *g, int y, int x);
 void		setup_dda(t_ray *ray, t_game *game);
 void		raycast_dda(t_ray *ray, t_game *g);
 
@@ -167,6 +167,9 @@ void		free_game(t_game *game);
 void		free_char_array(char **array);
 void		free_textures(t_textures *textures);
 int			free_all(t_game *game, char **tokens, char *message);
+
+//ft_get_time.c
+double		ft_get_time(void);
 
 //printer.c
 void		print_game_info(t_game *game);

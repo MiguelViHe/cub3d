@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 14:46:28 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/05 18:32:59 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/07 15:59:14 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int	calc_tex_inf(t_game *g, t_ray *ray)
 	char	map_elem;
 	
 	map_elem = g->map.matrix[ray->map.y][ray->map.x];
-	printf("Calculating texture for map element: %c at (%d, %d)\n", map_elem, ray->map.x, ray->map.y);
 	if (!g->map.textures[(int)map_elem].texture)
 		return (free_all(g, NULL, "Texture not loaded for map element"));
 	ray->tex_info.tx_dir = (int)map_elem;

@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:56:52 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/03 17:46:17 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/07 12:06:18 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct	s_door
 	int			y;
 	bool		open; // false = cerrada, true = abierta
 	double		anim_state;
+	double		timer;
 }				t_door;
 
 typedef struct	s_doors
