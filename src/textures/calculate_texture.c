@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 14:46:28 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/08 11:05:46 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/08 11:52:31 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	calc_wallx_and_texx(t_game *g, t_ray *ray)
 			ray->tex_info.tx.x = (int)ray->tex_info.mlx_tx->width - 1;
 	}
 	if ((ray->side == 0 && ray->dir.x > 0) 
-			|| (ray->side == 1 && ray->dir.y < 0))
+			|| (ray->side == 1 && ray->dir.y < 0)  || door)
 		ray->tex_info.tx.x = flip_texx(ray);
 }
 

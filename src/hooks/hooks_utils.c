@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 17:51:17 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/07 13:08:34 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/08 13:37:52 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void process_action_key(t_game *g)
 	if (door)
 	{
 		toggle_door(door);
+		// door->current_speed = DOOR_BASE_SPEED; // Resetea la velocidad al valor base al pulsar para abrir o cerrar la puerta //BUENA
 		if (door->open) //si la acabo de abrir actualizao el tiempo.
 			door->timer = ft_get_time();
 	}

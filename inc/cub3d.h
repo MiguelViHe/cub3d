@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/07 14:52:00 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/08 13:42:17 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 
 //window configuration
 # define	STRETCH_IMAGE	true
-# define	FULLSCREEN		false
+# define	FULLSCREEN		true
 
 // Player configuration
 # define	PLAYER_SPEED 3.0
@@ -39,7 +39,12 @@
 
 // Door configuration
 # define	DOOR_SYMBOL 'D' // Symbol representing a door in the map
-# define	DOOR_ANIMATION_SPEED 0.5 // Speed of door opening/closing animation in units per second
+// # define	DOOR_BASE_SPEED 0.05 // Speed of door opening/closing animation in units per second BUENA
+// # define    DOOR_ACCELERATION 0.6   // aceleración (unidades por segundo^2) BUENA
+// # define    MAX_DOOR_SPEED   2.0 BUENA
+# define    DOOR_ANIM_TIME 3 // segundos
+
+
 
 // Raycasting configuration
 # define		screenW 1280
