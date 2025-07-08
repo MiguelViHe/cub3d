@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 14:46:28 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/07 15:59:14 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/08 11:05:46 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	calc_wallx_and_texx(t_game *g, t_ray *ray)
 	t_door	*door;
 
 	ray->tex_info.wallX = calc_wallx(g, ray);
-	ray->tex_info.tx.x = (int)(ray->tex_info.wallX * ray->tex_info.mlx_tx->width);
+	ray->tex_info.tx.x = ray->tex_info.wallX * ray->tex_info.mlx_tx->width;
 	door = find_door(g, ray->map.x, ray->map.y);
 	if (door)
 	{
