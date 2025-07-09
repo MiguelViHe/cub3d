@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:04:11 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/07 13:03:44 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/09 14:04:58 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	on_keypress(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_RIGHT)
 		g->input.rotate_right = pressed;
 	if (keydata.key == MLX_KEY_E && keydata.action == MLX_PRESS)
-		process_action_key(g);
+		process_key(g, keydata);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		process_scape_key(g);
+		process_key(g, keydata);
 }
 
 void on_mouse_button(mouse_key_t btn, action_t act, modifier_key_t mod, void* p)
@@ -66,7 +66,7 @@ void on_game_loop(void *param)
 	double	rotSpeedm;
 
 	g = (t_game *)param;
-	moveSpeed = g->data.mlx->delta_time * PLAYER_SPEED;
+	moveSpeed = g->data.mlx->delta_time * get_player_speed(g->data.mlx);
 	rotSpeedk = g->data.mlx->delta_time * PLAYER_ROTATION_SPEED;
 	if (g->cursor_hidden)
 	{

@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/08 13:42:17 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/09 14:07:55 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 
 // Player configuration
 # define	PLAYER_SPEED 3.0
+# define	PLAYER_RUN_SPEED 2.0 * PLAYER_SPEED
 # define	PLAYER_ROTATION_SPEED 1.5
 # define	MOUSE_ROTATION_SPEED 0.05
 # define	FOV_DEGREES 66.0
@@ -74,12 +75,16 @@ t_door		*find_door(t_game *g, int x, int y);
 //game/game.c
 int			launch_game(t_game *game);
 
+//hooks/hooks_process_key.c
+void		process_e_key(t_game *g);
+void		process_scape_key(t_game *g);
+void		process_key(t_game *g, mlx_key_data_t keydata);
+
 //hooks/hooks_utils.c
 void		update_mouse_rotation(t_game *g, double rotSpeed);
 void		update_player_movement(t_game *g, double moveSpeed, double rotSpeed);
 void		update_doors_touch_timer(t_game *g);
-void		process_scape_key(t_game *g);
-void		process_action_key(t_game *g);
+double		get_player_speed(mlx_t *mlx);
 
 //hooks/hooks.c
 void		on_destroy(void *param);
