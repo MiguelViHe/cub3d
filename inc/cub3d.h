@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/16 10:00:59 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/16 12:00:47 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@
 // # define	DOOR_BASE_SPEED 0.05 // Speed of door opening/closing animation in units per second BUENA
 // # define    DOOR_ACCELERATION 0.6   // aceleración (unidades por segundo^2) BUENA
 // # define    MAX_DOOR_SPEED   2.0 BUENA
-# define    DOOR_ANIM_TIME 3 // segundos
+# define    DOOR_ANIM_TIME 3.0 // segundos
+# define    DOOR_OPEN_TIME 5.0 // segundos
 
 
 
@@ -191,11 +192,15 @@ double		deg_to_rad(double degrees);
 void		rotate_vector(t_vector *vect, double angle);
 t_vector	normalize(t_vector vect);
 
-// utils.c
-int			ft_clamp(int value, int min, int max);
+// utils/str_utils.c
 void		remove_newline(char *line);
 char		*remove_spaces(char *str);
 void		fill_with_spaces(char *dest, const char *src, int width);
+
+
+// utils/utils.c
+int			ft_clamp(int value, int min, int max);
+double		ft_clamp_double(double value, double min, double max);
 int			sign(double x);
 
 #endif

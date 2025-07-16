@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 09:34:31 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/08 13:38:00 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/16 11:26:41 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	set_doors_array(t_map *map, t_door *doors_array)
 				doors_array[index].y = y;
 				doors_array[index].open = 0; // 0 = closed, 1 = open
 				doors_array[index].anim_state = 0.0; // Initial animation state
-				// doors_array[index].current_speed = DOOR_BASE_SPEED; // Initial speed //BUENA
+				doors_array[index].anim_elapsed = 0.0; // Timer for door animation
 				doors_array[index].timer = 0.0; // Timer for door animation
 				index++;
 			}
