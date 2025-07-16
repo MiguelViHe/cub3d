@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 17:51:17 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/09 14:04:01 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/16 09:59:29 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,4 @@ void	update_doors_touch_timer(t_game *g)
 	door = find_door(g, (int)g->player.pos.x, (int)g->player.pos.y);
 	if (door && door->open)
 		door->timer = ft_get_time();
-}
-
-double	get_player_speed(mlx_t *mlx)
-{
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT_SHIFT))
-		return (PLAYER_RUN_SPEED);
-	else
-		return (PLAYER_SPEED);
 }

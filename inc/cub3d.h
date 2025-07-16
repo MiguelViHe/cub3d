@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/09 14:07:55 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/16 10:00:59 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void		process_key(t_game *g, mlx_key_data_t keydata);
 void		update_mouse_rotation(t_game *g, double rotSpeed);
 void		update_player_movement(t_game *g, double moveSpeed, double rotSpeed);
 void		update_doors_touch_timer(t_game *g);
-double		get_player_speed(mlx_t *mlx);
 
 //hooks/hooks.c
 void		on_destroy(void *param);
@@ -129,6 +128,7 @@ void		strafe_player_right(t_game *game, double moveSpeed);
 void		can_walk(t_game *game, double new_x, double new_y, t_vector dir);
 int			is_wall(t_game *g, double x, double y);
 int			is_player(char c);
+double		get_player_speed(mlx_t *mlx);
 
 //ray/calculate_ray.c
 double		calc_cameraX(int x);
