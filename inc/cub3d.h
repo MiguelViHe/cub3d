@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/16 12:00:47 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/17 17:39:47 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 # define CUB3D_H
 
 # define	TITLE "Cub3D"
-# define	TILE_SIZE 2048 //No usada. leer draw.c
+# define	TILE_SIZE 64 //No usada. leer draw.c
 
 # define 	MAX_TEXTURES 128 // 1 por cada caracter ASCII válido
 
 //configuration 
 # define	TEXTURES 		true
-# define	MINIMAP 		false
+# define	MINIMAP 		true
 
 //window configuration
 # define	STRETCH_IMAGE	true
@@ -40,13 +40,18 @@
 
 // Door configuration
 # define	DOOR_SYMBOL 'D' // Symbol representing a door in the map
-// # define	DOOR_BASE_SPEED 0.05 // Speed of door opening/closing animation in units per second BUENA
-// # define    DOOR_ACCELERATION 0.6   // aceleración (unidades por segundo^2) BUENA
-// # define    MAX_DOOR_SPEED   2.0 BUENA
-# define    DOOR_ANIM_TIME 3.0 // segundos
-# define    DOOR_OPEN_TIME 5.0 // segundos
+# define	DOOR_ANIM_TIME 3.0 // segundos
+# define	DOOR_OPEN_TIME 5.0 // segundos
 
-
+//MINIMAP
+# define	MINIMAP_MAX_RATIO 0.25 // ratio máximo del minimapa respecto al tamaño del mapa
+# define	MINIMAP_GRANULARITY_LINE 1.0 // Espacio entre líneas del minimapa
+# define	MINIMAP_COLOR_LINE 0xE5E8E8FF // Color of the minimap lines
+# define	MINIMAP_COLOR_PLAYER 0xF4D03FFF // Color of the minimap player
+# define	MINIMAP_COLOR_WALL 0x17202AFF // Color of the minimap lines
+# define	MINIMAP_COLOR_DOOR 0xD4AC0DFF // Color of the minimap lines
+# define	MINIMAP_COLOR_EMPTY 0x000000 // Color of the minimap lines
+# define	MINIMAP_COLOR_FLOOR 0x707B7CFF // Color of the minimap lines
 
 // Raycasting configuration
 # define		screenW 1280
@@ -81,10 +86,11 @@ void		process_e_key(t_game *g);
 void		process_scape_key(t_game *g);
 void		process_key(t_game *g, mlx_key_data_t keydata);
 
-//hooks/hooks_utils.c
+//hooks/hooks_updates.c
 void		update_mouse_rotation(t_game *g, double rotSpeed);
 void		update_player_movement(t_game *g, double moveSpeed, double rotSpeed);
 void		update_doors_touch_timer(t_game *g);
+void		update_minimap(t_game *g);
 
 //hooks/hooks.c
 void		on_destroy(void *param);
@@ -98,6 +104,17 @@ int			check_map(t_game *g);
 
 //map/generate_map_array.c
 int			generate_map_array(t_game *g);
+
+//minimap/draw_minimap_utils.c
+void		ft_draw_tile(mlx_image_t *img, t_vector vtile, size_t size, uint32_t color);
+void		ft_draw_line(mlx_image_t *img, t_vector e1, t_vector e2, uint32_t color);
+void		ft_draw_by_tile(char tile, mlx_image_t *img, t_vector pos, double scale);
+
+//minimap/draw_minimap.c
+void		ft_draw_minimap(t_minimap *minimap, t_game *g);
+
+//minimap/ft_create_minimap.c
+t_minimap	ft_create_minimap(t_game *g, t_map *map);
 
 //parse/parse_checkers.c
 bool		is_reserved_symbol(char c);

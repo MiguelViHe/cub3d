@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:04:11 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/09 14:04:58 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/17 11:55:32 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void on_game_loop(void *param)
 	update_player_movement(g, moveSpeed, rotSpeedk);
 	update_doors_touch_timer(g);
 	update_doors_animation(g, g->data.mlx->delta_time);
+	update_minimap(g);
 	if (cast_all_rays(g) < 0)
 		exit(-1);
-	
 }

@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 15:49:22 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/03 11:17:55 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/17 11:51:35 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_game	init_game(char *map_name)
 		(ft_fdprintf(2, "Error parsing %s\n", map_name), exit(EXIT_FAILURE));
 	if (init_doors(&game.map, &game.map.doors_info) < 0)
 		(free_all(&game, NULL, "Error initializing doors"), exit(EXIT_FAILURE));
-	print_door_info(game.map.doors_info);
+	// print_door_info(game.map.doors_info);
 	printf("Map parsed successfully.\n");
 	initialize_player(&game.map, &game.player);
 	game.fov_degrees = FOV_DEGREES;

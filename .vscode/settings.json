@@ -18,6 +18,14 @@
         "text_encoding": "c",
         "cub3d.h": "c",
         "map": "c",
-        "libft.h": "c"
+        "libft.h": "c",
+        "bitset": "c",
+        "functional": "c",
+        "istream": "c",
+        "limits": "c",
+        "sstream": "c",
+        "streambuf": "c",
+        "tuple": "c",
+        "*.inc": "c"
     }
 }

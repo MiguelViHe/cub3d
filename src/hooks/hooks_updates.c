@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks_utils.c                                      :+:      :+:    :+:   */
+/*   hooks_updates.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/26 17:51:17 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/16 09:59:29 by mvidal-h         ###   ########.fr       */
+/*   Created: 2025/07/17 11:56:14 by mvidal-h          #+#    #+#             */
+/*   Updated: 2025/07/17 11:56:21 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,11 @@ void	update_doors_touch_timer(t_game *g)
 	door = find_door(g, (int)g->player.pos.x, (int)g->player.pos.y);
 	if (door && door->open)
 		door->timer = ft_get_time();
+}
+
+void	update_minimap(t_game *g)
+{
+	if (!g || !g->map.minimap.img)
+		return ;
+	ft_draw_minimap(&g->map.minimap, g);
 }

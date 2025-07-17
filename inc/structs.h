@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:56:52 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/08 13:37:40 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/17 11:32:08 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,17 @@ typedef struct	s_doors
 	size_t		doors_count; // Número de puertas en el mapa
 }				t_doors;
 
+typedef struct	s_minimap
+{
+	mlx_image_t	*img; // Imagen del minimapa
+	int			width; // Ancho del minimapa
+	int			height; // Alto del minimapa
+	double		scale; // Escala del minimapa respecto al mapa real
+	bool		enabled; // Indica si el minimapa está habilitado
+	mlx_image_t	*text; // Imagen de texto para el minimapa
+	int32_t		instance; // ID de la instancia del minimapa
+}				t_minimap;
+
 typedef struct	s_map
 {
 	size_t		height;
@@ -79,6 +90,7 @@ typedef struct	s_map
 	int			player_count;
 	t_list		*map_list;
 	char		**matrix;
+	t_minimap	minimap; // Estructura para el minimapa
 	t_doors		doors_info; // Estructura para manejar puertas
 	t_textures	textures[MAX_TEXTURES];
 
@@ -90,6 +102,7 @@ typedef struct	s_data
 	mlx_image_t		*img;
 	int32_t			screen_width; //No se si es necesario, pero lo dejo por si acaso
 	int32_t			screen_height; // No se si es necesario, pero lo dejo por si acasou
+	int32_t			instance; // ID de la instancia de la imagen
 }				t_data;
 
 typedef struct	s_input
