@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:04:11 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/17 11:55:32 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/18 09:20:03 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	on_keypress(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_RIGHT)
 		g->input.rotate_right = pressed;
 	if (keydata.key == MLX_KEY_E && keydata.action == MLX_PRESS)
+		process_key(g, keydata);
+	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
 		process_key(g, keydata);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		process_key(g, keydata);

@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:12:50 by daniel            #+#    #+#             */
-/*   Updated: 2025/07/17 17:35:53 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/18 09:33:24 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void ft_draw_minimap(t_minimap *minimap, t_game *g)
 		return ;
 	ft_bzero(&draw_pos, sizeof(t_vector));
 	draw_pos.x = g->data.screen_width - minimap->width - 10; // 10 pixels from the right edge
-	draw_pos.y = 40; //
+	draw_pos.y = 40;
 	if (!minimap->img->instances)
 		ft_draw_minimap_image(minimap, g->data.mlx, draw_pos);
 	ft_draw_minimap_grid(minimap->img, &g->map, minimap->scale);

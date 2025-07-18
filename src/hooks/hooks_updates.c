@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 11:56:14 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/17 11:56:21 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/18 10:50:13 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ void	update_minimap(t_game *g)
 {
 	if (!g || !g->map.minimap.img)
 		return ;
-	ft_draw_minimap(&g->map.minimap, g);
+	if (g->map.minimap.enabled)
+		ft_draw_minimap(&g->map.minimap, g);
 }

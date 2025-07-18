@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 13:53:12 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/09 13:53:27 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/18 10:54:20 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,15 @@ void process_e_key(t_game *g)
 	}
 }
 
+void process_m_key(t_minimap *minimap)
+{
+	TOGGLE(minimap->enabled);
+	if (minimap->enabled)
+		minimap->img->instances[0].enabled = true;
+	else
+		minimap->img->instances[0].enabled = false;
+}
+
 void process_scape_key(t_game *g)
 {
 	if (g->cursor_hidden)
@@ -52,6 +61,8 @@ void process_key(t_game *g, mlx_key_data_t keydata)
 {
 	if (keydata.key == MLX_KEY_E && keydata.action == MLX_PRESS)
 		process_e_key(g);
+	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
+		process_m_key(&g->map.minimap);
 	else if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		process_scape_key(g);
 }
