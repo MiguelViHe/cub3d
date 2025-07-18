@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 09:49:05 by daniel            #+#    #+#             */
-/*   Updated: 2025/07/17 16:10:45 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/18 15:06:16 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,29 @@ void	ft_draw_tile(mlx_image_t *img, t_vector vtile, size_t size, uint32_t color)
 	}
 }
 
+void	ft_draw_pixel_neighbors(mlx_image_t *img, t_coord p, int thickness, uint32_t color)
+{
+	int	dx;
+	int	dy;
+	int	nx;
+	int	ny;
+
+	dy = -thickness;
+	while (dy <= thickness)
+	{
+		dx = -thickness;
+		while (dx <= thickness)
+		{
+			nx = p.x + dx;
+			ny = p.y + dy;
+			if (nx >= 0 && ny >= 0 && nx < (int)img->width && ny < (int)img->height)
+				mlx_put_pixel(img, nx, ny, color);
+			dx++;
+		}
+		dy++;
+	}
+}
+
 void	ft_draw_line(mlx_image_t *img, t_vector e1, t_vector e2, uint32_t color)
 {
 	t_vector	dist; // Distancia entre posicion de jugador y pared donde choca el rayo
@@ -56,11 +79,13 @@ void	ft_draw_line(mlx_image_t *img, t_vector e1, t_vector e2, uint32_t color)
 	aux.y = e1.y;
 	while (steps-- >= 0)
 	{
-		mlx_put_pixel(img, (int)aux.x, (int)aux.y, color);
+		ft_draw_pixel_neighbors(img, (t_coord){(int)aux.x, (int)aux.y},
+			MINIMAP_THICKNESS, color);
 		aux.x += inc.x;
 		aux.y += inc.y;
 	}
 }
+
 
 void ft_draw_by_tile(char tile, mlx_image_t *img, t_vector pos, double scale)
 {

@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:58:47 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/17 17:39:47 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/18 15:31:58 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,10 @@
 
 //MINIMAP
 # define	MINIMAP_MAX_RATIO 0.25 // ratio máximo del minimapa respecto al tamaño del mapa
-# define	MINIMAP_GRANULARITY_LINE 1.0 // Espacio entre líneas del minimapa
+# define	MINIMAP_THICKNESS 1 // Grosor de los rayos del minimapa
+# define	MINIMAP_GRANULARITY_LINE 5 * MINIMAP_THICKNESS // Espacio entre líneas del minimapa
 # define	MINIMAP_COLOR_LINE 0xE5E8E8FF // Color of the minimap lines
-# define	MINIMAP_COLOR_PLAYER 0xF4D03FFF // Color of the minimap player
+# define	MINIMAP_COLOR_PLAYER 0x9B59B6FF // Color of the minimap player
 # define	MINIMAP_COLOR_WALL 0x17202AFF // Color of the minimap lines
 # define	MINIMAP_COLOR_DOOR 0xD4AC0DFF // Color of the minimap lines
 # define	MINIMAP_COLOR_EMPTY 0x000000 // Color of the minimap lines
