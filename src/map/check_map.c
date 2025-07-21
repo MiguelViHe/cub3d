@@ -6,7 +6,7 @@
 /*   By: mvidal-h <mvidal-h@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 13:02:18 by mvidal-h          #+#    #+#             */
-/*   Updated: 2025/07/03 12:28:48 by mvidal-h         ###   ########.fr       */
+/*   Updated: 2025/07/21 10:56:15 by mvidal-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int check_map_closed(t_game *g, size_t height, size_t width)
 		x = 0;
 		while (x < width)
 		{
-			if (map[y][x] == '0' || is_player(map[y][x]))
+			if (map[y][x] == '0' || is_player(map[y][x]) || map[y][x] == 'D')
 			{
 				if (y == 0 || y == height - 1 || x == 0 || x == width - 1
 						|| map[y - 1][x] == ' ' || map[y + 1][x] == ' '
