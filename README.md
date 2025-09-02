@@ -59,11 +59,11 @@ or
 ./cub3d_bonus ./bonus/assets/maps/scene_1.cub
 ```
 
-Usa las teclas A, S, D y W para desplazarte por el mapa renderizado en 3D.
-Usa las las flechas izquiera y derecha para rotar sobre el mapa, también puedes usar el ratón.
-Usa la tecla E para abrir y cerrar puertas.
-Usa la tecla M para ocultar y mostrar el minimapa.
-Manten pulsada la tecla shift para correr.
+* Usa las teclas A, S, D y W para desplazarte por el mapa renderizado en 3D.
+* Usa las las flechas izquiera y derecha para rotar sobre el mapa, también puedes usar el ratón.
+* Usa la tecla E para abrir y cerrar puertas.
+* Usa la tecla M para ocultar y mostrar el minimapa.
+* Manten pulsada la tecla shift para correr.
 ---
 
 ## 🛠️ Tecnologías
